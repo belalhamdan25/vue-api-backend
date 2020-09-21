@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use GuzzleHttp\Psr7\Request;
+
 
 class AuthController extends Controller
 {
@@ -56,6 +58,32 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json(auth()->user());
+    }
+
+    public function update()
+    {
+        // auth()->user()->update($request->all());
+        $user = Auth::user();
+
+
+
+        $UserChanges =[
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'email' => request('email'),
+            'phone_number' => request('phone_number'),
+          ];
+
+
+        $user = Auth::user();
+
+        $user->update($UserChanges);
+
+        return response()->json([
+            'status' => 'user profile was updated',
+            'user'=>auth()->user()
+        ],200);
+
     }
 
     /**
