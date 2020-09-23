@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::group([
@@ -32,5 +32,18 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::patch('update', 'AuthController@update');
+
+});
+
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'portfolio'
+
+], function ($router) {
+
+    Route::get('portfolios', 'PortfolioController@all');
+;
 
 });
