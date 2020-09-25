@@ -9,6 +9,6 @@ use App\Http\Resources\Portfolio\PortfolioCollection;
 class PortfolioController extends Controller
 {
     public function all(){
-        return PortfolioCollection::collection(Portfolio::paginate(20));
+        return PortfolioCollection::collection(Portfolio::paginate(18));
     }
 }

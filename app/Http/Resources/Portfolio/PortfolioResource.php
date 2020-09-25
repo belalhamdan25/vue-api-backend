@@ -22,6 +22,7 @@ class PortfolioResource extends JsonResource
             'link'=>$this->link,
             'date'=>$this->date,
             'skills'=>$this->skills,
+            'category'=>$this->category,
             'img'=>$this->img
         ];
     }

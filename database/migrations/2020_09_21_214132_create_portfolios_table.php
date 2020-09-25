@@ -23,6 +23,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('link');
             $table->string('date');
             $table->string('skills');
+            $table->string('category');
             $table->string('img');
             $table->timestamps();
         });
