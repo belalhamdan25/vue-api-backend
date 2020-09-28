@@ -44,6 +44,7 @@ Route::group([
 ], function ($router) {
 
     Route::get('portfolios', 'PortfolioController@all');
+    Route::get('portfolios/search', 'PortfolioController@search');
 ;
 
 });
