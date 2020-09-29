@@ -20,7 +20,7 @@ $factory->define(Portfolio::class, function (Faker $faker) {
         'link' => $faker->url,
         'date' => $faker->monthName($max = 'now'),
         'skills' => $faker->sentence,
-        'category' => $faker->word,
+        'category' => $faker->randomElement(['design', 'translation','programming','writing','marketing','consulting']),
         'img' => 'https://mrkzgulfup.com/uploads/160086388051051.png',
     ];
 });

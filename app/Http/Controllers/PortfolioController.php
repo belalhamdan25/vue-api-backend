@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Portfolio;
 use App\Http\Resources\Portfolio\PortfolioCollection;
+use DB;
 
 class PortfolioController extends Controller
 {
@@ -22,15 +23,26 @@ class PortfolioController extends Controller
         if($request->has('q')) {
 
             // Using the Laravel Scout syntax to search the products table.
-            $posts = Portfolio::search($request->get('q'))->get();
+            $portfolios = Portfolio::search($request->get('q'))->get();
 
             // If there are results return them, if none, return the error message.
-            return $posts->count() ? $posts : $error;
+            return $portfolios->count() ? $portfolios : $error;
 
         }
 
         // Return the error message if no keywords existed
         return $error;
+    }
+
+    public function categoriesFilter(Request $request){
+
+        $portfolios= DB::table('portfolios')
+        ->where('category', 'like', '%'.$request->get('cq').'%')
+        ->orderBy('id', 'desc')
+        ->get();
+
+        return PortfolioCollection::collection($portfolios);
+
     }
 
 }
