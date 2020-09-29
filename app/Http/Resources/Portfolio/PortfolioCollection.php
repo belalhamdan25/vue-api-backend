@@ -19,7 +19,8 @@ class PortfolioCollection extends JsonResource
             'user_img'=>$this->user_img,
             'title'=>$this->title,
             'img'=>$this->img,
-            'desc'=>$this->desc
+            'desc'=>$this->desc,
+            'category'=>$this->category
         ];
     }
 }

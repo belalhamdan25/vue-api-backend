@@ -36,13 +36,18 @@ class PortfolioController extends Controller
 
     public function categoriesFilter(Request $request){
 
-        $portfolios= DB::table('portfolios')
-        ->where('category', 'like', '%'.$request->get('cq').'%')
-        ->orderBy('id', 'desc')
-        ->get();
+        $idsFromViewAsArray = $request->get('cq');
+        $portfolios = Portfolio::whereIn('category', $idsFromViewAsArray)->get();
+
+        // $portfolios= DB::table('portfolios')
+        // ->whereIn('category', 'like', '%'.$idsFromViewAsArray.'%')
+        // ->orderBy('id', 'desc')
+        // ->get();
 
         return PortfolioCollection::collection($portfolios);
 
     }
+
+
 
 }
