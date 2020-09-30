@@ -16,7 +16,8 @@ class PortfolioResource extends JsonResource
     {
         return [
             'user_id'=>$this->user_id,
-            'user_first_name'=>$this->user_first_name,
+            'user_name'=>$this->user_name,
+            'user_img'=>$this->user_img,
             'title'=>$this->title,
             'desc'=>$this->desc,
             'link'=>$this->link,
