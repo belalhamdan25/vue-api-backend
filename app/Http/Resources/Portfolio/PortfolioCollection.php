@@ -20,6 +20,8 @@ class PortfolioCollection extends JsonResource
             'title'=>$this->title,
             'img'=>$this->img,
             'desc'=>$this->desc,
+            'skills'=>$this->skills,
+            'category'=>$this->category
         ];
     }
 }

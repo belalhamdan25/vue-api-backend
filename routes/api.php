@@ -46,6 +46,8 @@ Route::group([
     Route::get('portfolios', 'PortfolioController@all');
     Route::get('portfolios/search', 'PortfolioController@search');
     Route::post('portfolios/categories-filter', 'PortfolioController@categoriesFilter');
+    Route::post('portfolios/skills-filter/', 'PortfolioController@skillsFilter');
+;
 ;
 
 });

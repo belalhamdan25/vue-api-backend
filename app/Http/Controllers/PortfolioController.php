@@ -5,49 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Portfolio;
 use App\Http\Resources\Portfolio\PortfolioCollection;
-use DB;
+use App\Tag;
 
 class PortfolioController extends Controller
 {
-    public function all(){
+    public function all()
+    {
         return PortfolioCollection::collection(Portfolio::paginate(18));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
- // First we define the error message we are going to show if no keywords
-        // existed or if no results found.
         $error = ['error' => 'No results found, please try with different keywords.'];
 
-        // Making sure the user entered a keyword.
-        if($request->has('q')) {
+        if ($request->has('q')) {
 
-            // Using the Laravel Scout syntax to search the products table.
             $portfolios = Portfolio::search($request->get('q'))->get();
-
-            // If there are results return them, if none, return the error message.
             return $portfolios->count() ? $portfolios : $error;
-
         }
-
-        // Return the error message if no keywords existed
         return $error;
     }
 
-    public function categoriesFilter(Request $request){
+    public function categoriesFilter(Request $request)
+    {
 
         $idsFromViewAsArray = $request->get('cq');
         $portfolios = Portfolio::whereIn('category', $idsFromViewAsArray)->get();
-
-        // $portfolios= DB::table('portfolios')
-        // ->whereIn('category', 'like', '%'.$idsFromViewAsArray.'%')
-        // ->orderBy('id', 'desc')
-        // ->get();
-
         return PortfolioCollection::collection($portfolios);
-
     }
 
-
-
+    public function skillsFilter(Request $request)
+    {
+        $tagid = Tag::whereIn('name', $request->get('sq'))->pluck('id')->toArray();
+        $results = [];
+        for ($i = 0; $i < count($tagid); $i++) {
+            $tagfind = Tag::find($tagid[$i]);
+            $portfolioResults = $tagfind->portfolios()->get();
+            $results = array_merge($results, $portfolioResults->toArray());
+        }
+        return (array)$results;
+    }
 }

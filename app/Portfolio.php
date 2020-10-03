@@ -9,4 +9,10 @@ class Portfolio extends Model
 {
     use Searchable;
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+
 }
