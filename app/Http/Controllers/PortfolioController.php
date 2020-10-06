@@ -27,23 +27,7 @@ class PortfolioController extends Controller
         return $error;
     }
 
-    public function categoriesFilter(Request $request)
-    {
 
-        $idsFromViewAsArray = $request->get('cq');
-        $portfolios = Portfolio::whereIn('category', $idsFromViewAsArray)->get();
-        return PortfolioCollection::collection($portfolios);
-    }
 
-    public function skillsFilter(Request $request)
-    {
-        $tagid = Tag::whereIn('name', $request->get('sq'))->pluck('id')->toArray();
-        $results = [];
-        for ($i = 0; $i < count($tagid); $i++) {
-            $tagfind = Tag::find($tagid[$i]);
-            $portfolioResults = $tagfind->portfolios()->get();
-            $results = array_merge($results, $portfolioResults->toArray());
-        }
-        return (array)$results;
-    }
+
 }
