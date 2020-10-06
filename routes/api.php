@@ -32,6 +32,7 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::patch('update', 'AuthController@update');
+    Route::get('roles', 'RolesController@roles');
 
 });
 
@@ -50,3 +51,4 @@ Route::group([
     Route::post('portfolios/skills-filter/', 'TagController@skillsFilter');
     Route::get('portfolios/skills-filter-names/', 'TagController@skillsFilterNames');
 });
+

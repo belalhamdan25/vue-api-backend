@@ -10,6 +10,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+
+
     use Notifiable;
 
     /**
@@ -18,7 +24,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name' ,'last_name','phone_number','email','password','user_type',
+        'first_name' ,'last_name','phone_number','email','password',
     ];
 
     /**

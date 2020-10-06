@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Tag;
 use App\Category;
+use App\Role;
 use Faker\Generator as Faker;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        $roles = ['admin', 'freelancer','client'];
+
+        for ($i = 0; $i < count($roles); $i++) {
+            Role::create(array(
+                'name' => $roles[$i],
+            ));
+            }
+
         factory(App\User::class,150)->create();
         $categories = ['design', 'translation','programming','writing','marketing','consulting' ];
         $categoriesDesc = ['Design and works', 'Translation and languages','Programming and development','Writing and editing','Sales and marketing','Consulting and training'];

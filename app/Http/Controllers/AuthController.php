@@ -29,26 +29,42 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
+        $role="admin";
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        if(auth()->user()->role_name==$role){
+            return response()->json(['error' => 'this account is admin'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
     public function register(){
-        User::create([
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'email' => request('email'),
-            'phone_number' => request('phone_number'),
-            'password' => Hash::make(request('password')),
-            'user_type' => request('user_type'),
-        ]);
+        $user = new User;
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->email = request('email');
+        $user->phone_number = request('phone_number');
+        $user->password = Hash::make(request('password'));
+        $user->role_name = request('role_name');
+        $user->save();
+
+        // User::create([
+        //     'first_name' => request('first_name'),
+        //     'last_name' => request('last_name'),
+        //     'email' => request('email'),
+        //     'phone_number' => request('phone_number'),
+        //     'password' => Hash::make(request('password')),
+        //     'role_name' => request('role_name'),
+        // ]);
 
         return $this->login(request());
     }
+
+
 
     /**
      * Get the authenticated User.
