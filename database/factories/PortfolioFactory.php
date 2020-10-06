@@ -8,14 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Portfolio::class, function (Faker $faker) {
     return [
         'user_id' => function(){
-            return App\User::all()->random()->id;
+            return App\User::where('role_name', 'freelancer')->pluck('id')->random();
         },
-        'user_name' => function(){
-            $first_name= App\User::all()->random()->first_name;
-            $last_name= App\User::all()->random()->last_name;
-            return $first_name ." ". $last_name;
-        },
-        'user_img' => 'https://mrkzgulfup.com/uploads/160086343374581.png',
         'title' => $faker->sentence,
         'desc' => $faker->paragraph,
         'link' => $faker->url,

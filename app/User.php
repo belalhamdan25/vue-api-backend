@@ -14,6 +14,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    public function portfolios(){
+        return $this->hasMany(Portfolio::class);
+    }
 
 
     use Notifiable;

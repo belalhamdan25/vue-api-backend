@@ -11,7 +11,9 @@ class PortfolioController extends Controller
 {
     public function all()
     {
-        return PortfolioCollection::collection(Portfolio::paginate(18));
+        $portfolio = Portfolio::with('user')->paginate(18);
+        return $portfolio;
+
     }
 
     public function search(Request $request)

@@ -15,9 +15,10 @@ class CreatePortfoliosTable extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned()->index();
-            $table->string('user_name');
-            $table->string('user_img');
+            // $table->integer('user_id')->unsigned()->index();
+            // $table->string('user_name');
+            // $table->string('user_img');
+            $table->integer('user_id');
             $table->string('title');
             $table->text('desc');
             $table->string('link');
