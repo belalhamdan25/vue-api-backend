@@ -23,10 +23,27 @@ class PortfolioController extends Controller
 
         if ($request->has('q')) {
 
-            $portfolios = Portfolio::search($request->get('q'))->get();
-            return $portfolios->count() ? $portfolios : $error;
-        }
-        return $error;
+        $Portfolio = Portfolio::where([
+            ['title', 'LIKE', '%' .  $request->get('q') . '%'],
+            ['desc', 'LIKE', '%' .  $request->get('q') . '%'],
+        ])
+        ->with('user')->get();
+        return $Portfolio->count() ? $Portfolio : $error;
+         }
+         return $error;
+
+
+        // $error = ['error' => 'No results found, please try with different keywords.'];
+
+        // if ($request->has('q')) {
+
+        //     $portfolios = Portfolio::search($request->get('q'))->get();
+        //     return $portfolios->count() ? $portfolios : $error;
+        // }
+        // return $error;
+        // php artisan scout:import "App\Portfolio"
+
+
     }
 
 
