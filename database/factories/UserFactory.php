@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     static $password;
     return [
-        'user_img' => 'https://mrkzgulfup.com/uploads/160086343374581.png',
+        'user_img' => null,
         'first_name' => $faker->firstNameMale,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,

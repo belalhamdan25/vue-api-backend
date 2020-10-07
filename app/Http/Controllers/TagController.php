@@ -13,7 +13,7 @@ class TagController extends Controller
         $results = [];
         for ($i = 0; $i < count($tagid); $i++) {
             $tagfind = Tag::find($tagid[$i]);
-            $portfolioResults = $tagfind->portfolios()->with('user')->get();
+            $portfolioResults = $tagfind->portfolios()->with('user')->orderBy('id', 'desc')->get();
             $results = array_merge($results, $portfolioResults->toArray());
         }
         return (array)$results;

@@ -18,6 +18,9 @@ $factory->define(Portfolio::class, function (Faker $faker) {
         'category_id' => function(){
             return App\Category::all()->random()->id;
         },
-        'img' => 'https://mrkzgulfup.com/uploads/160086388051051.png',
+        // 'img' => 'https://mrkzgulfup.com/uploads/160086388051051.png',
+        // 'img' => 'https://g.top4top.io/p_17412g65a1.png',
+        'img'=>$faker->imageUrl($width = 640, $height = 480,'technics')
+
     ];
 });

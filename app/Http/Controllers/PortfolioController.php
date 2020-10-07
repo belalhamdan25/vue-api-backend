@@ -11,7 +11,7 @@ class PortfolioController extends Controller
 {
     public function all()
     {
-        $portfolio = Portfolio::with('user')->paginate(18);
+        $portfolio = Portfolio::with('user')->orderBy('id', 'desc')->paginate(18);
         return $portfolio;
 
     }
