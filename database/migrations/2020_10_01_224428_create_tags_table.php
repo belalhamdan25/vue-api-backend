@@ -21,7 +21,7 @@ class CreateTagsTable extends Migration
         Schema::create('portfolio_tag', function (Blueprint $table) {
             $table->integer('tag_id');
             $table->integer('portfolio_id');
-            $table->primary(['portfolio_id','tag_id']);
+            // $table->primary(['portfolio_id','tag_id']);
         });
     }
 

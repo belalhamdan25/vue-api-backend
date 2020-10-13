@@ -14,7 +14,7 @@ class CategoryController extends Controller
         $results = [];
         for ($i = 0; $i < count($categoryId); $i++) {
             $tagfind = Category::find($categoryId[$i]);
-            $portfolioResults = $tagfind->portfolios()->with('user')->orderBy('id', 'desc')
+            $portfolioResults = $tagfind->portfolios()->with('user','portfolioImages')->orderBy('id', 'desc')
             ->get();
             $results = array_merge($results, $portfolioResults->toArray());
         }

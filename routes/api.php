@@ -45,10 +45,14 @@ Route::group([
 ], function ($router) {
 
     Route::get('portfolios', 'PortfolioController@all');
+    Route::get('portfolios/portfolios-show/{id}', 'PortfolioController@portfolioShow');
+    Route::get('portfolios/portfolios-show-skills/{id}', 'PortfolioController@portfolioShowSkills');
+    Route::get('portfolios/portfolios-show-images', 'PortfolioController@portfolioShowImages');
     Route::get('portfolios/search', 'PortfolioController@search');
     Route::post('portfolios/categories-filter', 'CategoryController@categoriesFilter');
     Route::get('portfolios/categories-filter-values', 'CategoryController@categoriesFilterValues');
     Route::post('portfolios/skills-filter/', 'TagController@skillsFilter');
+    Route::get('portfolios/skill-filter/', 'TagController@skillFilter');
     Route::get('portfolios/skills-filter-names/', 'TagController@skillsFilterNames');
 });
 

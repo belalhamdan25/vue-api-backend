@@ -19,8 +19,8 @@ $factory->define(Portfolio::class, function (Faker $faker) {
             return App\Category::all()->random()->id;
         },
         // 'img' => 'https://mrkzgulfup.com/uploads/160086388051051.png',
-        // 'img' => 'https://g.top4top.io/p_17412g65a1.png',
-        'img'=>$faker->imageUrl($width = 640, $height = 480,'technics')
+        // 'img' => $faker->randomElement(['["https://lorempixel.com/640/480/?59870,https://lorempixel.com/640/480/?95762"]', '["https://lorempixel.com/640/480/?65317,https://lorempixel.com/640/480/?61983"]','["https://lorempixel.com/640/480/?85962,https://lorempixel.com/640/480/?58352"]']),
+        // 'img'=>$faker->imageUrl($width = 640, $height = 480)
 
     ];
 });

@@ -7,7 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Portfolio extends Model
 {
-    use Searchable;
+    // use Searchable;
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
@@ -21,4 +21,7 @@ class Portfolio extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function portfolioImages(){
+        return $this->hasMany(PortfolioImage::class);
+    }
 }

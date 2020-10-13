@@ -15,13 +15,17 @@ class PortfolioCollection extends JsonResource
     public function toArray($request)
     {
         return [
-            'user_name'=>$this->user_name,
-            'user_img'=>$this->user_img,
-            'title'=>$this->title,
-            'img'=>$this->img,
-            'desc'=>$this->desc,
-            'skills'=>$this->skills,
-            'category'=>$this->category
+            // 'user_id'=>$this->user_id,
+            // 'title'=>$this->title,
+            // 'desc'=>$this->desc,
+            // 'link'=>$this->link,
+            // 'date'=>$this->date,
+            // 'category_id'=>$this->category_id,
+            // 'img'=>$this->img,
+            // 'user_first_name'=>$this->user->first_name,
+            // 'user_last_name'=>$this->user->last_name,
+            // 'user_img'=>$this->user->user_img,
+
         ];
     }
 }

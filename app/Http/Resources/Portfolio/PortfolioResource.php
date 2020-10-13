@@ -15,16 +15,21 @@ class PortfolioResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'user_id'=>$this->user_id,
-            'user_name'=>$this->user_name,
-            'user_img'=>$this->user_img,
             'title'=>$this->title,
             'desc'=>$this->desc,
             'link'=>$this->link,
             'date'=>$this->date,
-            'skills'=>$this->skills,
-            'category'=>$this->category,
-            'img'=>$this->img
+            'category_id'=>$this->category_id,
+            'img'=>$this->img,
+            'created_at'=>$this->created_at,
+            'user_first_name'=>$this->user->first_name,
+            'user_last_name'=>$this->user->last_name,
+            'user_img'=>$this->user->user_img,
+            'tags' => $this->whenPivotLoaded('tags', function () {
+                return $this->tags->name;
+            }),
         ];
     }
 }

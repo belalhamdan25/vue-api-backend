@@ -24,7 +24,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('link');
             $table->string('date');
             $table->integer('category_id');
-            $table->string('img');
+            // $table->string('img');
             $table->timestamps();
         });
     }

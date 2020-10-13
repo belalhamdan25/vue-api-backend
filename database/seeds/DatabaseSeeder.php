@@ -34,7 +34,9 @@ class DatabaseSeeder extends Seeder
             ));
             }
 
-        factory(App\Portfolio::class,150)->create();
+
+            factory(App\Portfolio::class,150)->create();
+            factory(App\PortfolioImage::class,500)->create();
 
 
         $skills = ['Photoshop','Illustrator', 'Graphic design','Logo design','Microsoft word','Microsoft excel','Translation','HTML 5','CSS 3','PHP','Online marketing','Web development','After effect','Android','Javascript','Bootstrap','Vuejs','Reactjs','Jquery','Data Analysis','Website Design','Mobile App Development','Writing','Editing','Video Editing','Search Engine Optimization','Social Media Marketing','MYSQL','3D Design','Laravel','ASP','Microsoft .NET','Node js','Git','Swift','Wordpress','UX design','UI design','Responsive design','User modeling','Independent Sales','Training','Consulting','Voice-Over Acting','Career Coaching','Research','TypeScript','Technical recruiter','Education','Advertising','Electronic' ,'design','E-books','Landing pages','Sketch','Microsoft office','Adobe','Interior design','Ruby on rails'];
@@ -45,8 +47,9 @@ class DatabaseSeeder extends Seeder
             ));
             }
 
+
                 //$i must be equal to Portfolio::class seed //tags table
-                for($i=0;$i<5;$i++){
+                for($i=0;$i<500;$i++){
                     DB::table('portfolio_tag')->insert([
                         'tag_id' => App\Tag::all()->random()->id,
                         'portfolio_id' => App\Portfolio::all()->random()->id,
