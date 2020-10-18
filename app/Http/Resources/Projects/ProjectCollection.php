@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Portfolio;
+namespace App\Http\Resources\Projects;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PortfolioResource extends JsonResource
+class ProjectCollection extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,17 +19,14 @@ class PortfolioResource extends JsonResource
             'user_id'=>$this->user_id,
             'title'=>$this->title,
             'desc'=>$this->desc,
-            'link'=>$this->link,
-            'date'=>$this->date,
-            'category_id'=>$this->category_id,
-            // 'img'=>$this->img,
+            'budget'=>$this->budget,
+            'time_line'=>$this->time_line,
+            'time_line'=>$this->time_line,
             'created_at'=>$this->created_at,
-            'user_first_name'=>$this->user->first_name,
-            'user_last_name'=>$this->user->last_name,
+            'user_name'=>$this->user->first_name." ".$this->user->last_name,
             'user_img'=>$this->user->user_img,
-            // 'tags' => $this->whenPivotLoaded('tags', function () {
-            //     return $this->tags->name;
-            // }),
+            'offers_count'=>$this->projectOffers->count(),
+            'skills'=>$this->tags
         ];
     }
 }

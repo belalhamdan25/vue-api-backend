@@ -56,3 +56,19 @@ Route::group([
     Route::get('portfolios/skills-filter-names/', 'TagController@skillsFilterNames');
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'project'
+
+], function ($router) {
+
+    Route::get('projects', 'ProjectController@all');
+    Route::get('search', 'ProjectController@search');
+    Route::post('categories-filter', 'ProjectController@categoriesFilter');
+    Route::post('skills-filter', 'ProjectController@skillsFilter');
+    Route::get('skill-filter', 'ProjectController@skillFilter');
+
+
+});
+

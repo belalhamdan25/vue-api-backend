@@ -21,7 +21,12 @@ class CreateTagsTable extends Migration
         Schema::create('portfolio_tag', function (Blueprint $table) {
             $table->integer('tag_id');
             $table->integer('portfolio_id');
-            // $table->primary(['portfolio_id','tag_id']);
+            $table->primary(['portfolio_id','tag_id']);
+        });
+        Schema::create('project_tag', function (Blueprint $table) {
+            $table->integer('tag_id');
+            $table->integer('project_id');
+            $table->primary(['project_id','tag_id']);
         });
     }
 
@@ -34,5 +39,6 @@ class CreateTagsTable extends Migration
     {
         Schema::dropIfExists('tags');
         Schema::dropIfExists('portfolio_tag');
+        Schema::dropIfExists('project_tag');
     }
 }

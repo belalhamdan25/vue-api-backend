@@ -37,27 +37,19 @@ class PortfolioController extends Controller
 
         if ($request->has('q')) {
 
-        $Portfolio = Portfolio::where([
-            ['title', 'LIKE', '%' .  $request->get('q') . '%'],
-            ['desc', 'LIKE', '%' .  $request->get('q') . '%'],
-        ])
+        $Portfolio = Portfolio::where('title', 'like', '%' . $request->get('q') . '%')->orWhere('desc', 'like', '%' . $request->get('q') . '%')
         ->with('user','portfolioImages')->get();
-        return $Portfolio->count() ? $Portfolio : $error;
+
+        if($Portfolio->count() > 0){
+            return $Portfolio;
+        }else{
+            return $error;
+        }
+
+         }else{
+            return $error;
+
          }
-         return $error;
-
-
-        // $error = ['error' => 'No results found, please try with different keywords.'];
-
-        // if ($request->has('q')) {
-
-        //     $portfolios = Portfolio::search($request->get('q'))->get();
-        //     return $portfolios->count() ? $portfolios : $error;
-        // }
-        // return $error;
-        // php artisan scout:import "App\Portfolio"
-
-
     }
 
     public function portfolioShowImages(Request $request){

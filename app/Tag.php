@@ -10,6 +10,10 @@ class Tag extends Model
         return $this->belongsToMany(Portfolio::class);
     }
 
+    public function projects(){
+        return $this->belongsToMany(Project::class);
+    }
+
     public function getRouteKeyName(){
         return 'name';
     }
