@@ -49,10 +49,10 @@ Route::group([
     Route::get('portfolios/portfolios-show-skills/{id}', 'PortfolioController@portfolioShowSkills');
     Route::get('portfolios/portfolios-show-images', 'PortfolioController@portfolioShowImages');
     Route::get('portfolios/search', 'PortfolioController@search');
-    Route::post('portfolios/categories-filter', 'CategoryController@categoriesFilter');
+    Route::post('portfolios/categories-filter', 'PortfolioController@categoriesFilter');
     Route::get('portfolios/categories-filter-values', 'CategoryController@categoriesFilterValues');
-    Route::post('portfolios/skills-filter/', 'TagController@skillsFilter');
-    Route::get('portfolios/skill-filter/', 'TagController@skillFilter');
+    Route::post('portfolios/skills-filter/', 'PortfolioController@skillsFilter');
+    Route::get('portfolios/skill-filter/', 'PortfolioController@skillFilter');
     Route::get('portfolios/skills-filter-names/', 'TagController@skillsFilterNames');
 });
 
@@ -68,6 +68,7 @@ Route::group([
     Route::post('categories-filter', 'ProjectController@categoriesFilter');
     Route::post('skills-filter', 'ProjectController@skillsFilter');
     Route::get('skill-filter', 'ProjectController@skillFilter');
+    Route::post('budget-filter', 'ProjectController@budgetFilter');
 
 
 });

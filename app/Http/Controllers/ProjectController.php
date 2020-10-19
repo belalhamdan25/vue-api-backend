@@ -103,4 +103,9 @@ class ProjectController extends Controller
 
     }
 
+    public function budgetFilter(Request $request)
+    {
+        return ProjectCollection::collection(Project::whereBetween('budget',$request->get('bq'))->orderBy('id', 'desc')->get());
+    }
+
 }
