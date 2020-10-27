@@ -11,7 +11,7 @@ $factory->define(Project::class, function (Faker $faker) {
             return App\User::where('role_name', 'client')->pluck('id')->random();
         },
         'title' => $faker->sentence,
-        'desc' => $faker->paragraph,
+        'desc' => $faker->text($maxNbChars = 1000),
         'budget' => $faker->numberBetween(1000,10000),
         'time_line' => $faker->randomDigitNot(0),
         'category_id' => function(){

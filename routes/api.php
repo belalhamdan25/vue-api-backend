@@ -69,6 +69,8 @@ Route::group([
     Route::post('skills-filter', 'ProjectController@skillsFilter');
     Route::get('skill-filter', 'ProjectController@skillFilter');
     Route::post('budget-filter', 'ProjectController@budgetFilter');
+    Route::get('project-show/{id}', 'ProjectController@projectShow');
+    Route::post('project-show-offers', 'ProjectController@projectShowOffers');
 
 
 });

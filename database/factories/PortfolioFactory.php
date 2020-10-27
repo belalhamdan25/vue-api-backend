@@ -11,7 +11,7 @@ $factory->define(Portfolio::class, function (Faker $faker) {
             return App\User::where('role_name', 'freelancer')->pluck('id')->random();
         },
         'title' => $faker->sentence,
-        'desc' => $faker->paragraph,
+        'desc' => $faker->text($maxNbChars = 450),
         'link' => $faker->url,
         'date' => $faker->monthName($max = 'now'),
         'category_id' => function(){

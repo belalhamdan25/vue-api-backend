@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Resources\Projects\ProjectCollection;
+use App\Http\Resources\Projects\ProjectResource;
+
 use App\Category;
 use App\Tag;
 
@@ -106,6 +108,18 @@ class ProjectController extends Controller
     public function budgetFilter(Request $request)
     {
         return ProjectCollection::collection(Project::whereBetween('budget',$request->get('bq'))->orderBy('id', 'desc')->get());
+    }
+
+    public function projectShow(Project $id){
+        return new ProjectResource($id);
+    }
+
+    public function projectShowOffers(Request $request){
+        $projectId=$request->get('pso');
+        $projectFind=Project::find($projectId);
+        $projectFindOffers = $projectFind->projectOffers()->with('user')->orderBy('id', 'asc')
+        ->get();
+        return $projectFindOffers;
     }
 
 }
