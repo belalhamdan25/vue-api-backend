@@ -50,6 +50,9 @@ class AuthController extends Controller
         $user->phone_number = request('phone_number');
         $user->password = Hash::make(request('password'));
         $user->role_name = request('role_name');
+        $user->location = request('location');
+        $user->category_id = request('category_id');
+        $user->rate = request('rate');
         $user->save();
 
         // User::create([
