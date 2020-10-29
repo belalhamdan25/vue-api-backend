@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
             ));
         }
 
-        factory(App\User::class, 150)->create();
         $categories = ['design', 'translation', 'programming', 'writing', 'marketing', 'consulting'];
         $categoriesDesc = ['Design and works', 'Translation and languages', 'Programming and development', 'Writing and editing', 'Sales and marketing', 'Consulting and training'];
 
@@ -38,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 'desc' => $categoriesDesc[$i]
             ));
         }
+        factory(App\User::class, 150)->create();
 
 
         factory(App\Portfolio::class, 150)->create();
@@ -68,6 +68,26 @@ class DatabaseSeeder extends Seeder
             }
             if ($x == 151) {
                 $x = 1;
+            }
+        }
+
+
+
+        $ju = 1;
+        $xu = 1;
+        //$i must be equal to Portfolio::class seed //tags table
+        for ($i = 0; $i < 450; $i++) {
+            DB::table('tag_user')->insert([
+                'tag_id' => App\Tag::find($ju)->id,
+                'user_id' => App\User::find($xu)->id,
+            ]);
+            $xu++;
+            $ju++;
+            if ($ju == 58) {
+                $ju = 1;
+            }
+            if ($xu == 151) {
+                $xu = 1;
             }
         }
 
