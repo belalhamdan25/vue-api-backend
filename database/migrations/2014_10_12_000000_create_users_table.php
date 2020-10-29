@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->string('password');
             $table->string('location');
-            $table->integer('rate');
+            $table->integer('rate')->default('0');
             $table->integer('category_id');
             $table->string('role_name');
             $table->rememberToken();
