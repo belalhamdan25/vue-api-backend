@@ -25,7 +25,6 @@ class PortfolioCollection extends JsonResource
             // 'user_first_name'=>$this->user->first_name,
             // 'user_last_name'=>$this->user->last_name,
             // 'user_img'=>$this->user->user_img,
-
         ];
     }
 }

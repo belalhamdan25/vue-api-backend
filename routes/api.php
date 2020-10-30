@@ -75,3 +75,15 @@ Route::group([
 
 });
 
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'freelancer'
+
+], function ($router) {
+
+    Route::get('freelancers', 'FreelancerController@all');
+
+});
+
