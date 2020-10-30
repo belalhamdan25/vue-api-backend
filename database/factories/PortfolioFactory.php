@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Portfolio::class, function (Faker $faker) {
     return [
         'user_id' => function(){
-            return App\User::where('role_name', 'freelancer')->pluck('id')->random();
+            return App\User::all()->random()->id;
         },
         'title' => $faker->sentence,
         'desc' => $faker->text($maxNbChars = 450),
