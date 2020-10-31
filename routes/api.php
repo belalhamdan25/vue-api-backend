@@ -84,6 +84,7 @@ Route::group([
 ], function ($router) {
 
     Route::get('freelancers', 'FreelancerController@all');
+    Route::get('search', 'FreelancerController@search');
 
 });
 
