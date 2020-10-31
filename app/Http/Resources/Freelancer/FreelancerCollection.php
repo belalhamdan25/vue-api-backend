@@ -19,7 +19,7 @@ class FreelancerCollection extends JsonResource
             'name'=>$this->first_name." ".$this->last_name,
             'user_img'=>$this->user_img,
             'location'=>$this->location,
-            'category'=>$this->category->desc,
+            'category'=>$this->category->name,
             'rate'=>$this->rate
         ];
     }
