@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\Freelancer\FreelancerCollection;
-
+use App\Category;
 
 class FreelancerController extends Controller
 {
@@ -39,6 +39,28 @@ class FreelancerController extends Controller
          }else{
             return $error;
          }
+
+    }
+
+    public function categoriesFilter(Request $request)
+    {
+        $results = [];
+        $freelnacersId=[];
+         $categoryId = Category::whereIn('name', $request->get('cq'))->pluck('id')->toArray();
+         for($i = 0; $i < count($categoryId); $i++){
+            $categoryfind = Category::find($categoryId[$i]);
+            $freelancersIdResultsId= $categoryfind->users()->where('role_name','freelancer')->pluck('id')->toArray();
+            array_push($freelnacersId, $freelancersIdResultsId);
+         }
+
+         $freelnacersIdMerged = array_merge(...$freelnacersId);
+
+         for($i=0;$i<count($freelnacersIdMerged);$i++){
+           $freelancerfindFind= new FreelancerCollection(User::find($freelnacersIdMerged[$i]));
+           array_push($results, $freelancerfindFind);
+
+         }
+        return $results;
 
     }
 
