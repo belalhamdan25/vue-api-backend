@@ -86,4 +86,21 @@ class FreelancerController extends Controller
 
     }
 
+    public function rateFilter(Request $request)
+    {
+        $results = [];
+
+        $freelancersratevalues=User::where('rate',$request->get('rq'))->get();
+
+        $freelancersId= $freelancersratevalues->where('role_name','freelancer')->pluck('id')->toArray();
+
+        for($i = 0; $i < count($freelancersId); $i++){
+            $UserFindSearch= new FreelancerCollection(User::find($freelancersId[$i]));
+            array_push($results, $UserFindSearch);
+        }
+
+        return $results;
+
+    }
+
 }
