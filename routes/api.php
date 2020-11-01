@@ -86,6 +86,7 @@ Route::group([
     Route::get('freelancers', 'FreelancerController@all');
     Route::get('search', 'FreelancerController@search');
     Route::post('categories-filter', 'FreelancerController@categoriesFilter');
+    Route::post('skills-filter', 'FreelancerController@skillsFilter');
 
 });
 

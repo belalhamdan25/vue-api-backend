@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\Freelancer\FreelancerCollection;
 use App\Category;
+use App\Tag;
 
 class FreelancerController extends Controller
 {
@@ -59,6 +60,27 @@ class FreelancerController extends Controller
            $freelancerfindFind= new FreelancerCollection(User::find($freelnacersIdMerged[$i]));
            array_push($results, $freelancerfindFind);
 
+         }
+        return $results;
+
+    }
+
+    public function skillsFilter(Request $request)
+    {
+        $results = [];
+        $freelnacersId=[];
+         $tagId = Tag::whereIn('name', $request->get('sq'))->pluck('id')->toArray();
+         for($i = 0; $i < count($tagId); $i++){
+            $tagfind = Tag::find($tagId[$i]);
+            $freelancerResultsId= $tagfind->users()->where('role_name','freelancer')->pluck('id')->toArray();
+            array_push($freelnacersId, $freelancerResultsId);
+         }
+
+         $freelancerIdMerged = array_merge(...$freelnacersId);
+
+         for($i=0;$i<count($freelancerIdMerged);$i++){
+           $freelancerFind= new FreelancerCollection(User::find($freelancerIdMerged[$i]));
+           array_push($results, $freelancerFind);
          }
         return $results;
 
