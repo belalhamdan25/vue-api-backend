@@ -53,6 +53,7 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->category_id = request('category_id');
         $user->rate = request('rate');
+        $user->user_img = request('user_img');
         $user->save();
 
         // User::create([

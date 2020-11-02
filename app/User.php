@@ -10,6 +10,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
+
+
+    protected $attributes = [
+    	'user_img' => null
+    ];
+
     public function role(){
         return $this->belongsTo(Role::class);
     }
