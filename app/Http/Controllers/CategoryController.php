@@ -12,8 +12,8 @@ class CategoryController extends Controller
     public function categoriesFilterValues()
     {
 
-        $rolesName = Category::all()->pluck('desc')->toArray();
-        return $rolesName;
+        $categoryData=Category::all();
+        return $categoryData;
 
     }
 }
