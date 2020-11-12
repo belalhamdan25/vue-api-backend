@@ -91,3 +91,15 @@ Route::group([
 
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'user'
+
+], function ($router) {
+
+    Route::get('user/{id}', 'UserController@userShow');
+
+
+});
+
