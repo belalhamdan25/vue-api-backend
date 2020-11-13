@@ -24,9 +24,12 @@ class UserResource extends JsonResource
             'created_at'=>$this->created_at,
             'about'=>$this->about,
             'portfolios'=>$this->portfolios,
+            'portfolios_count'=>$this->portfolios->count(),
             'projects'=>$this->projects,
+            'projects_count'=>$this->projects->count(),
             'user_offers'=>$this->projectOffers,
             'skills'=>$this->tags,
+            'skills_count'=>$this->tags->count(),
 
         ];
     }
