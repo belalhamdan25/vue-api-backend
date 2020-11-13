@@ -28,6 +28,7 @@ class UserResource extends JsonResource
             'projects'=>$this->projects,
             'projects_count'=>$this->projects->count(),
             'user_offers'=>$this->projectOffers,
+            'user_offers_count'=>$this->projectOffers->count(),
             'skills'=>$this->tags,
             'skills_count'=>$this->tags->count(),
 
