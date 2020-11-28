@@ -23,7 +23,7 @@ class UserResource extends JsonResource
             'category'=>$this->category->desc,
             'created_at'=>$this->created_at,
             'about'=>$this->about,
-            'portfolios'=>$this->portfolios,
+            'portfolios'=>$this->portfolios()->with('portfolioImages')->get(),
             'portfolios_count'=>$this->portfolios->count(),
             'projects'=>$this->projects,
             'projects_count'=>$this->projects->count(),
