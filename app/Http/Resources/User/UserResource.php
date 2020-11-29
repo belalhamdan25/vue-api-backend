@@ -27,7 +27,7 @@ class UserResource extends JsonResource
             'portfolios_count'=>$this->portfolios->count(),
             'projects'=>$this->projects,
             'projects_count'=>$this->projects->count(),
-            'user_offers'=>$this->projectOffers,
+            'user_offers'=>$this->projectOffers()->with('project')->get(),
             'user_offers_count'=>$this->projectOffers->count(),
             'skills'=>$this->tags,
             'skills_count'=>$this->tags->count(),
