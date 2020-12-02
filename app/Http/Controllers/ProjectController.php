@@ -45,9 +45,19 @@ class ProjectController extends Controller
 
     public function categoriesFilter(Request $request)
     {
+        $type=gettype($request->get('cq'));
+
         $results = [];
         $projectsId=[];
-         $categoryId = Category::whereIn('name', $request->get('cq'))->pluck('id')->toArray();
+
+        if($type=="intger"){
+            $categoryId = Category::whereIn('id', $request->get('cq'))->pluck('id')->toArray();
+
+        }else{
+            $categoryId = Category::whereIn('name', $request->get('cq'))->pluck('id')->toArray();
+
+        }
+
          for($i = 0; $i < count($categoryId); $i++){
             $categoryfind = Category::find($categoryId[$i]);
             $projectResultsId= $categoryfind->projects()->pluck('id')->toArray();
