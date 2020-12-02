@@ -99,6 +99,7 @@ Route::group([
 ], function ($router) {
 
     Route::get('user/{id}', 'UserController@userShow');
+    Route::get('user-dashboard/{id}', 'UserController@userDataDashboard');
 
 
 });

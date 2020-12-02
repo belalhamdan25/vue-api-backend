@@ -13,4 +13,19 @@ class UserController extends Controller
         return new UserResource($id);
 
     }
+
+    public function userDataDashboard(User $id)
+    {
+        $portfolioCount=User::find($id->id);
+
+        $offers_count=User::find($id->id);
+
+
+        return response()->json([
+            'portfolio_count' =>$portfolioCount->portfolios->count(),
+            'offers_count'=>$offers_count->projectOffers->count()
+        ],200);
+        // return "belal";
+    }
+
 }
