@@ -20,13 +20,17 @@ class UserController extends Controller
 
         $offers_count=User::find($id->id);
 
-        $categoriesName=User::find($id->id);
+
+        $balance=User::find($id->id);
 
 
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),
             'offers_count'=>$offers_count->projectOffers->count(),
-            'categories_name'=>$categoriesName->category->name
+            'balance_total'=>$balance->balance->total,
+            'withdrawable'=>$balance->balance->withdrawable,
+            'outstanding'=>$balance->balance->outstanding,
+            'under_review'=>$balance->balance->under_review,
         ],200);
         // if(gettype($request->get('cq'))=="integer"){
         // return "belal";
