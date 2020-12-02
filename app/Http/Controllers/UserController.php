@@ -14,7 +14,7 @@ class UserController extends Controller
 
     }
 
-    public function userDataDashboard(User $id)
+    public function userDataDashboard(User $id,Request $request)
     {
         $portfolioCount=User::find($id->id);
 
@@ -28,7 +28,11 @@ class UserController extends Controller
             'offers_count'=>$offers_count->projectOffers->count(),
             'categories_name'=>$categoriesName->category->name
         ],200);
+        // if(gettype($request->get('cq'))=="integer"){
         // return "belal";
+        // }else{
+        //     return gettype($request->get('cq'));
+        // }
     }
 
 }
