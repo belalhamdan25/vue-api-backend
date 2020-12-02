@@ -20,10 +20,13 @@ class UserController extends Controller
 
         $offers_count=User::find($id->id);
 
+        $categoriesName=User::find($id->id);
+
 
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),
-            'offers_count'=>$offers_count->projectOffers->count()
+            'offers_count'=>$offers_count->projectOffers->count(),
+            'categories_name'=>$categoriesName->category->name
         ],200);
         // return "belal";
     }

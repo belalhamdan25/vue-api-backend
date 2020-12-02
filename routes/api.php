@@ -72,7 +72,6 @@ Route::group([
     Route::get('project-show/{id}', 'ProjectController@projectShow');
     Route::post('project-show-offers', 'ProjectController@projectShowOffers');
 
-
 });
 
 
