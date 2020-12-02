@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
 
         factory(App\Portfolio::class, 150)->create();
         factory(App\Project::class, 150)->create();
+        // factory(App\Balance::class, 150)->create();
         // factory(App\PortfolioImage::class,1000)->create();
 
 
@@ -154,6 +155,19 @@ class DatabaseSeeder extends Seeder
             if ($xb == 151) {
                 $xb = 1;
             }
+        }
+
+
+        $bxxx = 1;
+        for ($i = 0; $i < 150; $i++) {
+            App\Balance::create(array(
+                'user_id' => App\User::find($bxxx)->id,
+                'outstanding' => $faker->numberBetween(0,500),
+                'under_review' => $faker->numberBetween(0,400),
+                'total' => $faker->numberBetween(0,1000),
+                'withdrawable' => $faker->numberBetween(0,100),
+            ));
+            $bxxx++;
         }
 
 
