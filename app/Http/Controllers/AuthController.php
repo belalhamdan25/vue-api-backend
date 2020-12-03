@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Balance;
 use GuzzleHttp\Psr7\Request;
 
 
@@ -54,7 +55,23 @@ class AuthController extends Controller
         $user->category_id = request('category_id');
         $user->rate = request('rate');
         $user->user_img = request('user_img');
+
+
+
+
         $user->save();
+
+        $Balance = new Balance;
+
+        $Balance->total = 0;
+        $Balance->withdrawable = 0;
+        $Balance->outstanding = 0;
+        $Balance->under_review = 0;
+        $Balance->user_id = $user->id;
+
+
+
+        $user->balance()->save($Balance);
 
         // User::create([
         //     'first_name' => request('first_name'),
