@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -30,20 +30,21 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-        $role="admin";
+        $role = "admin";
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        if(auth()->user()->role_name==$role){
+        if (auth()->user()->role_name == $role) {
             return response()->json(['error' => 'this account is admin'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
-    public function register(){
+    public function register()
+    {
         $user = new User;
         $user->first_name = request('first_name');
         $user->last_name = request('last_name');
@@ -104,12 +105,13 @@ class AuthController extends Controller
 
 
 
-        $UserChanges =[
+        $UserChanges = [
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
             'phone_number' => request('phone_number'),
-          ];
+            'location' => request('location'),
+        ];
 
 
         $user = Auth::user();
@@ -118,9 +120,8 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'user profile was updated',
-            'user'=>auth()->user()
-        ],200);
-
+            'user' => auth()->user()
+        ], 200);
     }
 
     /**
@@ -158,7 +159,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user'=>auth()->user()
+            'user' => auth()->user()
         ]);
     }
 }
