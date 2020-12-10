@@ -108,16 +108,7 @@ class AuthController extends Controller
         $user->phone_number = request('phone_number');
         $user->location = request('location');
         $user->gender = request('gender');
-
-
-        if(request('password') == request('confirmPassword')){
-            $user->password  = Hash::make(request('password'));
-        }else{
-            return response()->json([
-                'status' => 'please retype your password !',
-            ], 500);
-        }
-
+        $user->password  = Hash::make(request('password'));
 
         $user->save();
 
