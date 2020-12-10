@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('about')->nullable();
             $table->string('password');
             $table->string('location');
-            $table->string('gender');
+            $table->string('gender')->nullable();
             $table->integer('rate')->default('0');
             $table->integer('category_id');
             $table->string('role_name');
