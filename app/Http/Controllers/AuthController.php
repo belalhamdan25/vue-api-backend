@@ -98,7 +98,7 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function update()
+    public function update(Request $request)
     {
         // auth()->user()->update($request->all());
         $user = Auth::user();
@@ -110,6 +110,14 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->gender = request('gender');
 
+        $newPassword = $request->newPassword;
+        $confirmPassword = $request->confirmPassword;
+
+        if($newPassword == $confirmPassword){
+            $user->password  = Hash::make($newPassword);
+        }
+
+
         // $user->update($UserChanges);
 
         $user->save();
@@ -119,6 +127,8 @@ class AuthController extends Controller
             'user' => auth()->user()
         ], 200);
     }
+
+
 
     /**
      * Log the user out (Invalidate the token).
