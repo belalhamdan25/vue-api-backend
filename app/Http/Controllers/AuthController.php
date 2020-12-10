@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Balance;
-use GuzzleHttp\Psr7\Request;
+// use GuzzleHttp\Psr7\Request;
 
 
 class AuthController extends Controller
@@ -98,9 +98,8 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function update(Request $request)
+    public function update()
     {
-        // auth()->user()->update($request->all());
         $user = Auth::user();
 
         $user->first_name = request('first_name');
@@ -110,15 +109,15 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->gender = request('gender');
 
-        $newPassword = $request->password;
-        $confirmPassword = $request->confirmPassword;
 
-        if($newPassword == $confirmPassword){
-            $user->password  = Hash::make($newPassword);
+        if(request('password') == request('confirmPassword')){
+            $user->password  = Hash::make(request('password'));
+        }else{
+            return response()->json([
+                'status' => 'please retype your password !',
+            ], 500);
         }
 
-
-        // $user->update($UserChanges);
 
         $user->save();
 
