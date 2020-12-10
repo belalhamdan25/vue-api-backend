@@ -103,20 +103,15 @@ class AuthController extends Controller
         // auth()->user()->update($request->all());
         $user = Auth::user();
 
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->email = request('email');
+        $user->phone_number = request('phone_number');
+        $user->location = request('location');
 
+        // $user->update($UserChanges);
 
-        $UserChanges = [
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'email' => request('email'),
-            'phone_number' => request('phone_number'),
-            'location' => request('location'),
-        ];
-
-
-        $user = Auth::user();
-
-        $user->update($UserChanges);
+        $user->save();
 
         return response()->json([
             'status' => 'user profile was updated',
