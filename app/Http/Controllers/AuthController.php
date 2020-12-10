@@ -108,6 +108,7 @@ class AuthController extends Controller
         $user->email = request('email');
         $user->phone_number = request('phone_number');
         $user->location = request('location');
+        $user->gender = request('gender');
 
         // $user->update($UserChanges);
 
