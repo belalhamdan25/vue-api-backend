@@ -110,7 +110,7 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->gender = request('gender');
 
-        $newPassword = $request->newPassword;
+        $newPassword = $request->password;
         $confirmPassword = $request->confirmPassword;
 
         if($newPassword == $confirmPassword){
