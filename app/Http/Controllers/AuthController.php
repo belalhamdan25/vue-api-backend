@@ -144,9 +144,13 @@ class AuthController extends Controller
         $user = Auth::user();
     	$imageName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('users_images'), $imageName);
-        return response()->json(['success'=>'You have successfully upload image.']);
         $user->user_img = $imageName;
         $user->save();
+        // return response()->json(['success'=>'You have successfully upload image.']);
+        return response()->json([
+            'success' => 'You have successfully upload image.',
+            'user' => auth()->user()
+        ], 200);
 
     }
 
