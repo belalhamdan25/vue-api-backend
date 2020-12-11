@@ -141,17 +141,13 @@ class AuthController extends Controller
 
     public function userImageStore(Request $request)
     {
-        $user = Auth::user();
     	$imageName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('users_images'), $imageName);
-        $user->user_img = $imageName;
-        $user->save();
         // return response()->json(['success'=>'You have successfully upload image.']);
         return response()->json([
+            'img_name' => $imageName,
             'success' => 'You have successfully upload image.',
-            'user' => auth()->user()
-        ], 200);
-
+        ]);
     }
 
     /**
