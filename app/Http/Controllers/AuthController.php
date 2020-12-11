@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'update']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','update']]);
     }
 
     /**
@@ -113,35 +113,12 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if ($request->hasFile('first_name')) {
-
-            $user->first_name = request('first_name');
-        }
-
-        if ($request->hasFile('last_name')) {
-
-            $user->last_name = request('last_name');
-        }
-
-        if ($request->hasFile('email')) {
-
-            $user->email = request('email');
-        }
-
-        if ($request->hasFile('phone_number')) {
-
-            $user->phone_number = request('phone_number');
-        }
-
-        if ($request->hasFile('location')) {
-
-            $user->location = request('location');
-        }
-
-        if ($request->hasFile('gender')) {
-            $user->gender = request('gender');
-        }
-
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->email = request('email');
+        $user->phone_number = request('phone_number');
+        $user->location = request('location');
+        $user->gender = request('gender');
 
         if ($request->hasFile('user_img')) {
 
@@ -153,7 +130,7 @@ class AuthController extends Controller
 
         if ($request->hasFile('user_img')) {
 
-            request('user_img')->move(public_path('users_images'), $img_name);
+        request('user_img')->move(public_path('users_images'),$img_name);
         }
 
         return response()->json([
