@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','update']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','update','userImageStore']]);
     }
 
     /**
@@ -105,9 +105,9 @@ class AuthController extends Controller
     {
 
 
-        if ($request->hasFile('user_img')) {
-            $img_name =  uniqid() . '.' . request('user_img')->getClientOriginalExtension();
-        }
+        // if ($request->hasFile('user_img')) {
+        //     $img_name =  uniqid() . '.' . request('user_img')->getClientOriginalExtension();
+        // }
 
 
 
@@ -120,18 +120,18 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->gender = request('gender');
 
-        if ($request->hasFile('user_img')) {
+        // if ($request->hasFile('user_img')) {
 
-            $user->user_img = $img_name;
-        }
+        //     $user->user_img = $img_name;
+        // }
 
         $user->save();
 
 
-        if ($request->hasFile('user_img')) {
+        // if ($request->hasFile('user_img')) {
 
-        request('user_img')->move(public_path('users_images'),$img_name);
-        }
+        // request('user_img')->move(public_path('users_images'),$img_name);
+        // }
 
         return response()->json([
             'status' => 'user profile was updated',
@@ -139,7 +139,16 @@ class AuthController extends Controller
         ], 200);
     }
 
+    public function userImageStore(Request $request)
+    {
+        $user = Auth::user();
+    	$imageName = time().'.'.$request->image->getClientOriginalExtension();
+        $request->image->move(public_path('users_images'), $imageName);
+        return response()->json(['success'=>'You have successfully upload image.']);
+        $user->user_img = $imageName;
+        $user->save();
 
+    }
 
     /**
      * Log the user out (Invalidate the token).
