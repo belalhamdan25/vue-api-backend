@@ -143,7 +143,18 @@ class AuthController extends Controller
     {
     	$imageName = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('users_images'), $imageName);
-        // return response()->json(['success'=>'You have successfully upload image.']);
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->user_img = $imageName;
+            $user->save();
+        }else{
+            return response()->json([
+                'auth' => 'no',
+            ]);
+        }
+
+
         return response()->json([
             'img_name' => $imageName,
             'success' => 'You have successfully upload image.',
