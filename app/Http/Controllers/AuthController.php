@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Balance;
+// use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
+
 // use GuzzleHttp\Psr7\Request;
 
 
@@ -19,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'update']]);
     }
 
     /**
@@ -98,18 +101,60 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function update()
+    public function update(Request $request)
     {
+
+
+        if ($request->hasFile('user_img')) {
+            $img_name =  uniqid() . '.' . request('user_img')->getClientOriginalExtension();
+        }
+
+
+
         $user = Auth::user();
 
-        $user->first_name = request('first_name');
-        $user->last_name = request('last_name');
-        $user->email = request('email');
-        $user->phone_number = request('phone_number');
-        $user->location = request('location');
-        $user->gender = request('gender');
+        if ($request->hasFile('first_name')) {
+
+            $user->first_name = request('first_name');
+        }
+
+        if ($request->hasFile('last_name')) {
+
+            $user->last_name = request('last_name');
+        }
+
+        if ($request->hasFile('email')) {
+
+            $user->email = request('email');
+        }
+
+        if ($request->hasFile('phone_number')) {
+
+            $user->phone_number = request('phone_number');
+        }
+
+        if ($request->hasFile('location')) {
+
+            $user->location = request('location');
+        }
+
+        if ($request->hasFile('gender')) {
+            $user->gender = request('gender');
+        }
+
+
+        if ($request->hasFile('user_img')) {
+
+            $user->user_img = $img_name;
+        }
 
         $user->save();
+
+
+        if ($request->hasFile('user_img')) {
+
+            request('user_img')->move(public_path('users_images'), $img_name);
+        }
 
         return response()->json([
             'status' => 'user profile was updated',

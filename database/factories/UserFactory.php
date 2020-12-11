@@ -21,9 +21,10 @@ $factory->define(User::class, function (Faker $faker) {
     static $password;
 
     return [
-        'user_img' => $faker->randomElement([null,'https://platforms.tqnee.com/ta3ref/wp-content/uploads/2019/05/74sByqd.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQey3S6VQ4qIppedXehx8CQYDshaMBwU1UwpQ&usqp=CAU']),
-        'first_name' => $faker->firstNameMale,
-        'last_name' => $faker->lastName,
+        // 'user_img' => $faker->randomElement([null,'https://platforms.tqnee.com/ta3ref/wp-content/uploads/2019/05/74sByqd.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQey3S6VQ4qIppedXehx8CQYDshaMBwU1UwpQ&usqp=CAU']),
+            'user_img' => null,
+            'first_name' => $faker->firstNameMale,
+            'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'phone_number' => $faker->phoneNumber,

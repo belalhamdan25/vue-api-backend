@@ -31,7 +31,7 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-    Route::patch('update', 'AuthController@update');
+    Route::post('update', 'AuthController@update');
     Route::get('roles', 'RolesController@roles');
 
 });
