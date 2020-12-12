@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','update','userImageStore']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'update', 'userImageStore','me']]);
     }
 
     /**
@@ -142,22 +142,29 @@ class AuthController extends Controller
     public function userImageStore(Request $request)
     {
 
-        if (Auth::check()) {
-            $imageName = time().'.'.$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('users_images'), $imageName);
-            $user = Auth::user();
-            $user->user_img = $imageName;
-            $user->save();
-            return response()->json([
-                'img_name' => $imageName,
-                'success' => 'You have successfully upload image.',
-            ]);
+        $token = $request->header('Authorization', $request->bearerToken());
+
+        if ($token != null) {
+            if (Auth::check()) {
+                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move(public_path('users_images'), $imageName);
+                $user = Auth::user();
+                $user->user_img = $imageName;
+                $user->save();
+                return response()->json([
+                    'img_name' => $imageName,
+                    'success' => 'You have successfully upload image.',
+                ]);
+            } else {
+                return response()->json([
+                    'auth_check' => 'unauthorized',
+                ]);
+            }
         }else{
             return response()->json([
-                'auth_check' => 'unauthorized',
+                'token' => 'not_found',
             ]);
         }
-
     }
 
     /**
