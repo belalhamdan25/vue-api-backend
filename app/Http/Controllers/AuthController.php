@@ -141,24 +141,23 @@ class AuthController extends Controller
 
     public function userImageStore(Request $request)
     {
-    	$imageName = time().'.'.$request->image->getClientOriginalExtension();
-        $request->image->move(public_path('users_images'), $imageName);
 
         if (Auth::check()) {
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('users_images'), $imageName);
             $user = Auth::user();
             $user->user_img = $imageName;
             $user->save();
+            return response()->json([
+                'img_name' => $imageName,
+                'success' => 'You have successfully upload image.',
+            ]);
         }else{
             return response()->json([
-                'auth' => 'no',
+                'auth_check' => 'unauthorized',
             ]);
         }
 
-
-        return response()->json([
-            'img_name' => $imageName,
-            'success' => 'You have successfully upload image.',
-        ]);
     }
 
     /**
