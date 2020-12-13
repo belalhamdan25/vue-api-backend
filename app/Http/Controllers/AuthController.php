@@ -106,11 +106,6 @@ class AuthController extends Controller
     {
 
 
-        // if ($request->hasFile('user_img')) {
-        //     $img_name =  uniqid() . '.' . request('user_img')->getClientOriginalExtension();
-        // }
-
-
 
         $user = Auth::user();
 
@@ -120,30 +115,11 @@ class AuthController extends Controller
         $user->phone_number = request('phone_number');
         $user->location = request('location');
         $user->gender = request('gender');
-
-        if($request->has('category_id')){
-            $user->category_id = request('category_id');
-            $user->save();
-        }
-
-        if($request->has('about')){
-            $user->about = request('about');
-            $user->save();
-        }
-
-
-        // if ($request->hasFile('user_img')) {
-
-        //     $user->user_img = $img_name;
-        // }
+        $user->category_id = request('category_id');
+        $user->about = request('about');
 
         $user->save();
 
-
-        // if ($request->hasFile('user_img')) {
-
-        // request('user_img')->move(public_path('users_images'),$img_name);
-        // }
 
         return response()->json([
             'status' => 'user profile was updated',
