@@ -33,7 +33,8 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::post('update', 'AuthController@update');
     Route::get('roles', 'RolesController@roles');
-    Route::post('store_user-image', 'AuthController@userImageStore');
+    Route::post('store-user-image', 'AuthController@userImageStore');
+    Route::post('store-web-user-data', 'AuthController@updateWebsiteData');
 });
 
 

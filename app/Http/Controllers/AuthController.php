@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Tag;
 use App\Balance;
 // use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request;
@@ -164,6 +165,47 @@ class AuthController extends Controller
             return response()->json([
                 'token' => 'not_found',
             ]);
+        }
+    }
+
+    public function updateWebsiteData(Request $request){
+        $token = $request->header('Authorization', $request->bearerToken());
+        $user = Auth::user();
+
+        if($token != null){
+            if(Auth::check()){
+
+
+                if($request->has('category_id')){
+                    $user->category_id = request('category_id');
+                    $user->save();
+                }
+
+                if($request->has('about')){
+                    $user->about = request('about');
+                    $user->save();
+                }
+
+                if($request->has('tags_id')){
+                    $user = User::find($user->id);
+                    // $user->tags()->attach($beer_id);
+                    $user->tags()->sync(request('tags_id'));
+                }
+
+
+                return response()->json([
+                    'success' => 'website info updated',
+                ], 200);
+
+            }else{
+                return response()->json([
+                    'not checked' => 'user unchecked',
+                ], 200);
+            }
+        }else{
+            return response()->json([
+                'token' => 'token invalid',
+            ], 200);
         }
     }
 
