@@ -27,6 +27,7 @@ class UserController extends Controller
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),
             'offers_count'=>$offers_count->projectOffers->count(),
+            'projects_count'=>$offers_count->projects->count(),
             'balance_total'=>$balance->balance->total,
             'withdrawable'=>$balance->balance->withdrawable,
             'outstanding'=>$balance->balance->outstanding,
