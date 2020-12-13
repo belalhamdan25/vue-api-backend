@@ -121,6 +121,17 @@ class AuthController extends Controller
         $user->location = request('location');
         $user->gender = request('gender');
 
+        if($request->has('category_id')){
+            $user->category_id = request('category_id');
+            $user->save();
+        }
+
+        if($request->has('about')){
+            $user->about = request('about');
+            $user->save();
+        }
+
+
         // if ($request->hasFile('user_img')) {
 
         //     $user->user_img = $img_name;
@@ -176,15 +187,6 @@ class AuthController extends Controller
             if(Auth::check()){
 
 
-                if($request->has('category_id')){
-                    $user->category_id = request('category_id');
-                    $user->save();
-                }
-
-                if($request->has('about')){
-                    $user->about = request('about');
-                    $user->save();
-                }
 
                 if($request->has('tags_id')){
                     $user = User::find($user->id);
