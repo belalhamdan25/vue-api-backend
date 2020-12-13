@@ -16,4 +16,12 @@ class TagController extends Controller
 
         return $allTagName;
     }
+
+    public function skillsFilterNamesIds()
+    {
+        // $allTagName=Tag::all();
+        $allTagName = Tag::select('name','id')->get();
+
+        return $allTagName;
+    }
 }

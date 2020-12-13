@@ -55,6 +55,7 @@ Route::group([
     Route::post('portfolios/skills-filter/', 'PortfolioController@skillsFilter');
     Route::get('portfolios/skill-filter/', 'PortfolioController@skillFilter');
     Route::get('portfolios/skills-filter-names/', 'TagController@skillsFilterNames');
+    Route::get('portfolios/skills-filter-id-names/', 'TagController@skillsFilterNamesIds');
 });
 
 Route::group([
