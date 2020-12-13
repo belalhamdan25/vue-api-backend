@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'rate'=>$this->rate,
             'category'=>$this->category->desc,
             'created_at'=>$this->created_at,
+            'role_name'=>$this->role_name,
             'about'=>$this->about,
             'portfolios'=>$this->portfolios()->with('portfolioImages')->get(),
             'portfolios_count'=>$this->portfolios->count(),
