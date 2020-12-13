@@ -120,6 +120,9 @@ class AuthController extends Controller
 
         $user->save();
 
+        $user = User::find($user->id);
+        $user->tags()->sync(request('tags_id'));
+
 
         return response()->json([
             'status' => 'user profile was updated',
