@@ -101,6 +101,8 @@ Route::group([
 
     Route::get('user/{id}', 'UserController@userShow');
     Route::get('user-dashboard/{id}', 'UserController@userDataDashboard');
+    Route::get('my-projects/{id}', 'UserController@myProjects');
+    Route::get('my-portfolios/{id}', 'UserController@myPortfolios');
 
 
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\MyProjectsResource;
+use App\Http\Resources\User\MyPortfoliosResource;
 use App\User;
 
 class UserController extends Controller
@@ -33,11 +35,18 @@ class UserController extends Controller
             'outstanding'=>$balance->balance->outstanding,
             'under_review'=>$balance->balance->under_review,
         ],200);
-        // if(gettype($request->get('cq'))=="integer"){
-        // return "belal";
-        // }else{
-        //     return gettype($request->get('cq'));
-        // }
+
+    }
+
+    public function myProjects(User $id)
+    {
+        return new MyProjectsResource($id);
+    }
+
+    public function myPortfolios(User $id)
+    {
+        return new MyPortfoliosResource($id);
+
     }
 
 }
