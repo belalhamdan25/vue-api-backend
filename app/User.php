@@ -36,10 +36,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Tag::class);
     }
 
-    public function balance()
-    {
-        return $this->hasOne(Balance::class);
-    }
+
 
 
     use Notifiable;

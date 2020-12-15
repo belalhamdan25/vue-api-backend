@@ -107,3 +107,15 @@ Route::group([
 
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'balance'
+
+], function ($router) {
+
+    Route::post('charge', 'BalanceController@charge');
+
+
+});
+

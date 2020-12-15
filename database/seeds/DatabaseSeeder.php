@@ -158,18 +158,6 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        $bxxx = 1;
-        for ($i = 0; $i < 150; $i++) {
-            App\Balance::create(array(
-                'user_id' => App\User::find($bxxx)->id,
-                'outstanding' => $faker->numberBetween(0,500),
-                'under_review' => $faker->numberBetween(0,400),
-                'total' => $faker->numberBetween(0,1000),
-                'withdrawable' => $faker->numberBetween(0,100),
-            ));
-            $bxxx++;
-        }
-
 
     }
 }

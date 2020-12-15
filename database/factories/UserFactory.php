@@ -29,6 +29,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'phone_number' => $faker->phoneNumber,
         'location' => $faker->countryCode,
+        'balance' => $faker->numberBetween(0,1000),
         'gender' => $faker->randomElement(['Male','Female']),
         'about' => $faker->text($maxNbChars = 1000),
         'password' => $password ?: $password=bcrypt('belal123456'), // password
