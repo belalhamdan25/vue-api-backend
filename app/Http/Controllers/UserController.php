@@ -19,12 +19,8 @@ class UserController extends Controller
     public function userDataDashboard(User $id,Request $request)
     {
         $portfolioCount=User::find($id->id);
-
         $offers_count=User::find($id->id);
-
-
         $balance=User::find($id->id);
-
 
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),

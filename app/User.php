@@ -13,7 +13,8 @@ class User extends Authenticatable implements JWTSubject
 
 
     protected $attributes = [
-    	'user_img' => null
+    	'user_img' => null,
+    	'balance' => 0
     ];
 
     public function role(){
