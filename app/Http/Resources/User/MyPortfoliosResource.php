@@ -18,7 +18,7 @@ class MyPortfoliosResource extends JsonResource
             'id'=>$this->id,
             'user_name'=>$this->first_name." ".$this->last_name,
             'user_img'=>$this->user_img,
-            'portfolios'=>$this->portfolios,
+            'portfolios'=>$this->portfolios()->with('portfolioImages')->get(),
         ];
     }
 }
