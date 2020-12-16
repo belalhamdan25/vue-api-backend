@@ -29,7 +29,10 @@ class UserController extends Controller
             'offers_count'=>$offers_count->projectOffers->count(),
             'projects_count'=>$offers_count->projects->count(),
             'balance_total'=>$balance->balance,
-            'projectStatus'=>$projectStatus->projects()->select('status')->get(),
+            'projectStatusOpen'=>$projectStatus->projects()->select('status')->where('status','open')->get(),
+            'projectStatusClosed'=>$projectStatus->projects()->select('status')->where('status','closed')->get(),
+            'projectStatusProccess'=>$projectStatus->projects()->select('status')->where('status','in proccess')->get(),
+            'projectStatusFinished'=>$projectStatus->projects()->select('status')->where('status','finished')->get(),
             'projectStatusCount'=>$projectStatus->projects()->select('status')->count()
         ],200);
 
