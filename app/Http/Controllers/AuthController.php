@@ -208,6 +208,31 @@ class AuthController extends Controller
 
     }
 
+    public function updatePassword()
+    {
+        $Cpassword=request('Cpassword');
+        $Npassword=request('Npassword');
+        $CNpassword=request('CNpassword');
+
+
+
+        if(Hash::check($Cpassword,Auth::user()->password)){
+            if($Npassword == $CNpassword){
+                $finalNewPass=$CNpassword;
+                Auth::user()->password = Hash::make($finalNewPass);
+                Auth::user()->save();
+                return response()->json(['message' => 'Password Updated'], 200);
+
+            }else{
+                return response()->json(['message' => 'Invalid New Password Confirmation Please Try Again !'], 400);
+            }
+        }else{
+            return response()->json(['message' => 'Invalid Current Password Confirmation Please Try Again !'], 400);
+        }
+
+
+    }
+
 
 
     /**
