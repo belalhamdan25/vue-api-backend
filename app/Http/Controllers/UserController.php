@@ -36,7 +36,7 @@ class UserController extends Controller
             'projectStatusProccess'=>$projectStatus->projects()->select('status')->where('status','in proccess')->get(),
             'projectStatusProccessCount'=>$projectStatus->projects()->select('status')->where('status','in proccess')->count(),
             'projectStatusFinished'=>$projectStatus->projects()->select('status')->where('status','finished')->get(),
-            'projectStatusFinishedCount'=>$projectStatus->projects()->select('status')->where('status','finished')->Count(),
+            'projectStatusFinishedCount'=>$projectStatus->projects()->select('status')->where('status','finished')->count(),
             'projectStatusCount'=>$projectStatus->projects()->select('status')->count()
         ],200);
 
