@@ -7,6 +7,7 @@ use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\MyProjectsResource;
 use App\Http\Resources\User\MyPortfoliosResource;
 use App\User;
+use App\Transaction;
 
 class UserController extends Controller
 {
@@ -40,6 +41,13 @@ class UserController extends Controller
     public function myPortfolios(User $id)
     {
         return new MyPortfoliosResource($id);
+
+    }
+
+    public function myTransaction(User $id)
+    {
+        $transaction = Transaction::where('user_id',$id->id)->orderBy('id', 'desc')->get();
+        return $transaction;
 
     }
 
