@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
 
         factory(App\Portfolio::class, 150)->create();
         factory(App\Project::class, 150)->create();
+        factory(App\Transaction::class, 750)->create();
         // factory(App\Balance::class, 150)->create();
         // factory(App\PortfolioImage::class,1000)->create();
 

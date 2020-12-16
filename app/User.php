@@ -37,7 +37,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Tag::class);
     }
 
-
+    public function transaction(){
+        return $this->hasMany(Transaction::class);
+    }
 
 
     use Notifiable;
