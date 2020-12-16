@@ -22,13 +22,15 @@ class UserController extends Controller
         $portfolioCount=User::find($id->id);
         $offers_count=User::find($id->id);
         $balance=User::find($id->id);
+        $projectStatus=User::find($id->id);
 
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),
             'offers_count'=>$offers_count->projectOffers->count(),
             'projects_count'=>$offers_count->projects->count(),
             'balance_total'=>$balance->balance,
-
+            'projectStatus'=>$projectStatus->projects()->select('status')->get(),
+            'projectStatusCount'=>$projectStatus->projects()->select('status')->count()
         ],200);
 
     }
