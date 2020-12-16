@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
             $table->text('desc');
             $table->integer('budget');
             $table->string('time_line');
+            $table->string('status');
             $table->integer('category_id');
             $table->timestamps();
         });

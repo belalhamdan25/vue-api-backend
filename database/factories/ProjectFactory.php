@@ -15,6 +15,7 @@ $factory->define(Project::class, function (Faker $faker) {
         'desc' => $faker->text($maxNbChars = 1000),
         'budget' => $faker->numberBetween(1000,10000),
         'time_line' => $faker->randomDigitNot(0),
+        'status' => $faker->randomElement(['open','closed','in proccess','finished']),
         'category_id' => function(){
             return App\Category::all()->random()->id;
         },
