@@ -8,6 +8,7 @@ use App\Http\Resources\User\MyProjectsResource;
 use App\Http\Resources\User\MyPortfoliosResource;
 use App\User;
 use App\Transaction;
+use App\ProjectOffer;
 
 class UserController extends Controller
 {
@@ -23,21 +24,28 @@ class UserController extends Controller
         $offers_count=User::find($id->id);
         $balance=User::find($id->id);
         $projectStatus=User::find($id->id);
+        $offerStatus=ProjectOffer::where('user_id',$id->id)->select('status')->get();
+
+
 
         return response()->json([
             'portfolio_count' =>$portfolioCount->portfolios->count(),
             'offers_count'=>$offers_count->projectOffers->count(),
             'projects_count'=>$offers_count->projects->count(),
             'balance_total'=>$balance->balance,
-            'projectStatusOpen'=>$projectStatus->projects()->select('status')->where('status','open')->get(),
+            // 'projectStatusOpen'=>$projectStatus->projects()->select('status')->where('status','open')->get(),
             'projectStatusOpenCount'=>$projectStatus->projects()->select('status')->where('status','open')->count(),
-            'projectStatusClosed'=>$projectStatus->projects()->select('status')->where('status','closed')->get(),
+            // 'projectStatusClosed'=>$projectStatus->projects()->select('status')->where('status','closed')->get(),
             'projectStatusClosedCount'=>$projectStatus->projects()->select('status')->where('status','closed')->count(),
-            'projectStatusProccess'=>$projectStatus->projects()->select('status')->where('status','in proccess')->get(),
+            // 'projectStatusProccess'=>$projectStatus->projects()->select('status')->where('status','in proccess')->get(),
             'projectStatusProccessCount'=>$projectStatus->projects()->select('status')->where('status','in proccess')->count(),
-            'projectStatusFinished'=>$projectStatus->projects()->select('status')->where('status','finished')->get(),
+            // 'projectStatusFinished'=>$projectStatus->projects()->select('status')->where('status','finished')->get(),
             'projectStatusFinishedCount'=>$projectStatus->projects()->select('status')->where('status','finished')->count(),
-            'projectStatusCount'=>$projectStatus->projects()->select('status')->count()
+            'projectStatusCount'=>$projectStatus->projects()->select('status')->count(),
+            'offerStatusAwaitingApprovalCount'=>$offerStatus->where('status','awaiting approval')->count(),
+            'offerStatusInProccessCount'=>$offerStatus->where('status','in proccess')->count(),
+            'offerStatusFinishedCount'=>$offerStatus->where('status','finished')->count(),
+            'offerStatusCount'=>$offerStatus->count(),
         ],200);
 
     }
