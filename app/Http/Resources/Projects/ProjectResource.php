@@ -21,6 +21,7 @@ class ProjectResource extends JsonResource
             'desc'=>$this->desc,
             'budget'=>$this->budget,
             'time_line'=>$this->time_line,
+            'status'=>$this->status,
             'created_at'=>$this->created_at,
             'user_name'=>$this->user->first_name." ".$this->user->last_name,
             'user_img'=>$this->user->user_img,
