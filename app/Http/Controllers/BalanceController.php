@@ -16,6 +16,7 @@ class BalanceController extends Controller
         $transaction->desc = "charge amount";
         $transaction->amount = request('amount');
         $transaction->user_id = $user->id;
+        $transaction->save();
 
         return response()->json([
             'status' => 'balance charged',
