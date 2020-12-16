@@ -9,9 +9,9 @@ use App\User;
 use App\Tag;
 // use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request;
-
 // use GuzzleHttp\Psr7\Request;
-
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'update', 'userImageStore','me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'update', 'userImageStore', 'me', 'forGotPassword']]);
     }
 
     /**
@@ -140,23 +140,24 @@ class AuthController extends Controller
                     'auth_check' => 'unauthorized',
                 ]);
             }
-        }else{
+        } else {
             return response()->json([
                 'token' => 'not_found',
             ]);
         }
     }
 
-    public function updateWebsiteData(Request $request){
+    public function updateWebsiteData(Request $request)
+    {
         $token = $request->header('Authorization', $request->bearerToken());
         $user = Auth::user();
 
-        if($token != null){
-            if(Auth::check()){
+        if ($token != null) {
+            if (Auth::check()) {
 
 
 
-                if($request->has('tags_id')){
+                if ($request->has('tags_id')) {
                     $user = User::find($user->id);
                     // $user->tags()->attach($beer_id);
                     $user->tags()->sync(request('tags_id'));
@@ -166,18 +167,48 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => 'website info updated',
                 ], 200);
-
-            }else{
+            } else {
                 return response()->json([
                     'not checked' => 'user unchecked',
                 ], 200);
             }
-        }else{
+        } else {
             return response()->json([
                 'token' => 'token invalid',
             ], 200);
         }
     }
+
+    public function forGotPassword()
+    {
+        $email = request('email');
+        $password = uniqid();
+        $user_id=User::where('email',$email)->get('id');
+        if($user_id->isNotEmpty()){
+            $user = User::where('email', $email)
+            ->first();
+            $user->password=Hash::make($password);
+            $user->save();
+
+            $title = '[Reset Password] Worker';
+            $user_details = [
+                'password' => $password,
+                'email' => $email
+            ];
+
+            $sendmail = Mail::to($user_details['email'])->send(new SendMail($title, $user_details));
+            if (empty($sendmail)) {
+                return response()->json(['message' => 'Password Reset Mail Sent Sucssfully'], 200);
+            }else{
+                return response()->json(['message' => 'Password Reset Mail Sent fail'], 400);
+            }
+        }else{
+            return response()->json(['message' => 'Invalid Email Please Try Again !'], 400);
+        }
+
+    }
+
+
 
     /**
      * Log the user out (Invalidate the token).

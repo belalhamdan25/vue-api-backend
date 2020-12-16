@@ -53,6 +53,7 @@ class User extends Authenticatable implements JWTSubject
         'first_name' ,'last_name','phone_number','email','password',
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -61,6 +62,10 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
 
     /**
      * The attributes that should be cast to native types.
