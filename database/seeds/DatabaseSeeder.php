@@ -130,6 +130,7 @@ class DatabaseSeeder extends Seeder
                 'timeline' => $faker->randomDigitNot(0),
                 'coast' => $faker->numberBetween(1000,10000),
                 'desc' => $faker->paragraph,
+                'status' => $faker->randomElement(['awaiting approval','in proccess','finished']),
                 'project_id' => Project::find($l)->id,
                 'user_id' => App\User::find($l)->id,
             ));
