@@ -35,7 +35,7 @@ Route::group([
     Route::get('roles', 'RolesController@roles');
     Route::post('store-user-image', 'AuthController@userImageStore');
     Route::post('store-web-user-data', 'AuthController@updateWebsiteData');
-    Route::get('forgot-password', 'AuthController@forGotPassword');
+    Route::post('forgot-password', 'AuthController@forGotPassword');
 });
 
 
