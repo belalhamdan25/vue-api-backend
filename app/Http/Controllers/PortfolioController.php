@@ -96,5 +96,9 @@ class PortfolioController extends Controller
         return $tagFind->portfolios()->with('user','portfolioImages')->orderBy('id', 'desc')->get();
     }
 
+    public function portfoliosCreate(){
+        return "portfoliosCreate";
+    }
+
 
 }
