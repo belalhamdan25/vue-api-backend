@@ -127,7 +127,7 @@ class AuthController extends Controller
                 $imageName = $request->file('image')->store('users_images', 's3');
                 Storage::disk('s3')->setVisibility($imageName,'public');
                 $user = Auth::user();
-                $user->user_img = basename($imageName);
+                $user->user_img = Storage::disk('s3')->url($imageName);
                 $user->save();
                 return response()->json([
                     'img_name' => basename($imageName),
