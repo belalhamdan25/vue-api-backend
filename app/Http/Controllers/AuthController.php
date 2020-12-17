@@ -12,9 +12,7 @@ use Illuminate\Http\Request;
 // use GuzzleHttp\Psr7\Request;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
-use Aws\S3\S3Client;
-use League\Flysystem\AwsS3v2\AwsS3Adapter;
-use League\Flysystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -127,11 +125,13 @@ class AuthController extends Controller
                 // $imageName = time() . '.' . $request->image->getClientOriginalExtension();
                 // $request->image->move(public_path('users_images'), $imageName);
                 $imageName = $request->file('image')->store('users_images', 's3');
+                Storage::disk('s3')->setVisibility($imageName,'public');
                 $user = Auth::user();
-                $user->user_img = $imageName;
+                $user->user_img = basename($imageName);
                 $user->save();
                 return response()->json([
-                    'img_name' => $imageName,
+                    'img_name' => basename($imageName),
+                    'img_url' =>  Storage::disk('s3')->url($imageName),
                     'success' => 'You have successfully upload image.',
                 ]);
             } else {
