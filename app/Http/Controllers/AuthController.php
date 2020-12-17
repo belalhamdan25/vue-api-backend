@@ -106,12 +106,12 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
-
         $user->save();
 
         $user = User::find($user->id);
         $user->tags()->sync(request('tags_id'));
 
+        $user->save();
 
         return response()->json([
             'status' => 'user profile was updated',
