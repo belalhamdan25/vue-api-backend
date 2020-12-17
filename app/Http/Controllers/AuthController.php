@@ -106,7 +106,8 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
-        $user->user_img = request('user_img');
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $user->user_img = $imageName;
         $user->save();
 
         $user = User::find($user->id);
