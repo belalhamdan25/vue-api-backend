@@ -103,8 +103,6 @@ class AuthController extends Controller
         $user->category_id = request('category_id');
         $user->about = request('about');
 
-        $user->user_img = request('image');
-
         $userTag = User::find($user->id);
         $userTag->tags()->sync(request('tags_id'));
         $userTag->save();
