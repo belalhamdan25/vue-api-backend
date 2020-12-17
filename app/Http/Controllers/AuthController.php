@@ -93,11 +93,7 @@ class AuthController extends Controller
 
     public function update(Request $request)
     {
-
-
-
         $user = Auth::user();
-
         $user->first_name = request('first_name');
         $user->last_name = request('last_name');
         $user->email = request('email');
@@ -106,8 +102,8 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
-        $user->user_img = request('user_img');
-        $user->save();
+
+        $user->user_img = request('image');
 
         $userTag = User::find($user->id);
         $userTag->tags()->sync(request('tags_id'));
