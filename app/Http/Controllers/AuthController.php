@@ -106,15 +106,12 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
-        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-        $request->image->move(public_path('users_images'), $imageName);
-        $user->user_img = $imageName;
+        $user->user_img = request('user_img');
         $user->save();
 
-        $user = User::find($user->id);
-        $user->tags()->sync(request('tags_id'));
-
-        $user->save();
+        $userTag = User::find($user->id);
+        $userTag->tags()->sync(request('tags_id'));
+        $userTag->save();
 
         return response()->json([
             'status' => 'user profile was updated',
@@ -134,7 +131,6 @@ class AuthController extends Controller
                 $user = Auth::user();
                 $user->user_img = $imageName;
                 $user->save();
-
                 return response()->json([
                     'img_name' => $imageName,
                     'success' => 'You have successfully upload image.',
@@ -148,38 +144,6 @@ class AuthController extends Controller
             return response()->json([
                 'token' => 'not_found',
             ]);
-        }
-    }
-
-    public function updateWebsiteData(Request $request)
-    {
-        $token = $request->header('Authorization', $request->bearerToken());
-        $user = Auth::user();
-
-        if ($token != null) {
-            if (Auth::check()) {
-
-
-
-                if ($request->has('tags_id')) {
-                    $user = User::find($user->id);
-                    // $user->tags()->attach($beer_id);
-                    $user->tags()->sync(request('tags_id'));
-                }
-
-
-                return response()->json([
-                    'success' => 'website info updated',
-                ], 200);
-            } else {
-                return response()->json([
-                    'not checked' => 'user unchecked',
-                ], 200);
-            }
-        } else {
-            return response()->json([
-                'token' => 'token invalid',
-            ], 200);
         }
     }
 
