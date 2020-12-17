@@ -102,6 +102,7 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
+        $user->save();
 
         $userTag = User::find($user->id);
         $userTag->tags()->sync(request('tags_id'));
