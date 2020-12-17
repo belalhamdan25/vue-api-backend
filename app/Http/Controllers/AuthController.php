@@ -106,6 +106,7 @@ class AuthController extends Controller
         $user->gender = request('gender');
         $user->category_id = request('category_id');
         $user->about = request('about');
+        $user->user_img = request('user_img');
         $user->save();
 
         $user = User::find($user->id);
@@ -131,6 +132,7 @@ class AuthController extends Controller
                 $user = Auth::user();
                 $user->user_img = $imageName;
                 $user->save();
+
                 return response()->json([
                     'img_name' => $imageName,
                     'success' => 'You have successfully upload image.',
