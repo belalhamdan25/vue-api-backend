@@ -107,6 +107,7 @@ class AuthController extends Controller
         $user->category_id = request('category_id');
         $user->about = request('about');
         $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(public_path('users_images'), $imageName);
         $user->user_img = $imageName;
         $user->save();
 
