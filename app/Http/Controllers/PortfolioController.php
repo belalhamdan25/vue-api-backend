@@ -105,11 +105,11 @@ class PortfolioController extends Controller
         $portfolio->link = $request->get('link');
         $portfolio->date = $request->get('date');
         $portfolio->category_id = $request->get('category_id');
+        $portfolio->tags()->sync(request('tags_id'));
+
         $portfolio->save();
 
-        $userTag = Portfolio::find($portfolio->id);
-        $userTag->tags()->sync(request('tags_id[]'));
-        $userTag->save();
+
 
         // $images_urls = [];
         // for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
