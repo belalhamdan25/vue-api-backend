@@ -108,9 +108,9 @@ class PortfolioController extends Controller
 
         $portfolio->save();
 
-            // $userTag = Portfolio::where('id', $portfolio->id)
-            // ->first();
-        $userTag = Portfolio::find($portfolio->id);
+            $userTag = Portfolio::where('id', $portfolio->id)
+            ->first();
+        // $userTag = Portfolio::find($portfolio->id);
         $userTag->tags()->sync($request->get('pTags'));
         $userTag->save();
 
