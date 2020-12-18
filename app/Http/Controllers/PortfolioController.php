@@ -111,26 +111,26 @@ class PortfolioController extends Controller
         $userTag->tags()->sync(request('tags_id[]'));
         $userTag->save();
 
-        $images_urls = [];
-        for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
-            $portfolioImage_name = new PortfolioImage;
-            $imageName = $request->portfolioImages_name[$i]->store('portfolio_images', 's3');
-            $portfolioImage_name->portfolio_id = $portfolio->id;
-            $portfolioImage_name->name = Storage::disk('s3')->url($imageName);
-            $portfolioImage_url = Storage::disk('s3')->url($imageName);
-            Storage::disk('s3')->setVisibility($imageName, 'public');
-            $portfolioImage_name->save();
-            array_push($images_urls, $portfolioImage_url);
-        }
-
-        // $uploadedFiles=$request->pics;
-        // foreach($uploadedFiles as $file){
-        //     $file->store('portfolio_images', 's3');
+        // $images_urls = [];
+        // for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
+        //     $portfolioImage_name = new PortfolioImage;
+        //     $imageName = $request->portfolioImages_name[$i]->store('portfolio_images', 's3');
+        //     $portfolioImage_name->portfolio_id = $portfolio->id;
+        //     $portfolioImage_name->name = Storage::disk('s3')->url($imageName);
+        //     $portfolioImage_url = Storage::disk('s3')->url($imageName);
+        //     Storage::disk('s3')->setVisibility($imageName, 'public');
+        //     $portfolioImage_name->save();
+        //     array_push($images_urls, $portfolioImage_url);
         // }
+
+        $uploadedFiles=$request->pics;
+        foreach($uploadedFiles as $file){
+            $file->store('portfolio_images', 's3');
+        }
 
         return response()->json([
             'portfolio' => $portfolio,
-            'portfolioImages_name' => $images_urls,
+            // 'portfolioImages_name' => $images_urls,
         ]);
     }
 }
