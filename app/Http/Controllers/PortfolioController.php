@@ -108,7 +108,18 @@ class PortfolioController extends Controller
 
         $portfolio->save();
 
-            $tagsId=$request->tagsId;
+
+        $uploadedFiles=$request->pics;
+        foreach($uploadedFiles as $file){
+            $imageName=$file->store('portfolio_images', 's3');
+             Storage::disk('s3')->setVisibility($imageName, 'public');
+            $portfolio_image = new PortfolioImage;
+            $portfolio_image->portfolio_id=$portfolio->id;
+            $portfolio_image->name=Storage::disk('s3')->url($imageName);
+            $portfolio_image->save();
+        }
+
+            $tagsId=$request->get('date');
             for($i=0;$i<count($tagsId);$i++){
                 $portfolio->tags()->attach($request->pTags[$i]);
             }
@@ -128,18 +139,6 @@ class PortfolioController extends Controller
         //     $portfolioImage_name->save();
         //     array_push($images_urls, $portfolioImage_url);
         // }
-
-        $uploadedFiles=$request->pics;
-        foreach($uploadedFiles as $file){
-            $imageName=$file->store('portfolio_images', 's3');
-             Storage::disk('s3')->setVisibility($imageName, 'public');
-            $portfolio_image = new PortfolioImage;
-            $portfolio_image->portfolio_id=$portfolio->id;
-            $portfolio_image->name=Storage::disk('s3')->url($imageName);
-            $portfolio_image->save();
-        }
-
-
 
         return response(['status'=>'success'],200);
 
