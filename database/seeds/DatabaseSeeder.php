@@ -38,8 +38,6 @@ class DatabaseSeeder extends Seeder
             ));
         }
         factory(App\User::class, 150)->create();
-
-
         factory(App\Portfolio::class, 150)->create();
         factory(App\Project::class, 150)->create();
         factory(App\Transaction::class, 1000)->create();
