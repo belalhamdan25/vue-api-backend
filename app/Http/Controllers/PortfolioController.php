@@ -125,8 +125,14 @@ class PortfolioController extends Controller
 
         $uploadedFiles=$request->pics;
         foreach($uploadedFiles as $file){
-            $file->store('portfolio_images', 's3');
+            $imageName=$file->store('portfolio_images', 's3');
+            $portfolio_image = new PortfolioImage;
+            $portfolio_image->portfolio_id=$portfolio->id;
+            $portfolio_image->name=Storage::disk('s3')->url($imageName);
+            $portfolio_image->save();
         }
+
+
 
         return response(['status'=>'success'],200);
 
