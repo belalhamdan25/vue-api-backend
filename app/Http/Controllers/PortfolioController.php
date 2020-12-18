@@ -130,6 +130,7 @@ class PortfolioController extends Controller
 
         return response()->json([
             'status' => "success",
+            'image_name'=>Storage::disk('s3')->url($filename)
         ]);
     }
 }
