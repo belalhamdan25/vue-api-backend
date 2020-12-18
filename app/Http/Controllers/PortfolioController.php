@@ -96,16 +96,16 @@ class PortfolioController extends Controller
 
     public function portfoliosCreate(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $portfolio = new Portfolio;
-        $portfolio->user_id = $user->id;
-        $portfolio->title = $request->get('title');
-        $portfolio->desc = $request->get('desc');
-        $portfolio->link = $request->get('link');
-        $portfolio->date = $request->get('date');
-        $portfolio->category_id = $request->get('category_id');
-        $portfolio->save();
+        // $portfolio = new Portfolio;
+        // $portfolio->user_id = $user->id;
+        // $portfolio->title = $request->get('title');
+        // $portfolio->desc = $request->get('desc');
+        // $portfolio->link = $request->get('link');
+        // $portfolio->date = $request->get('date');
+        // $portfolio->category_id = $request->get('category_id');
+        // $portfolio->save();
 
         // $userTag = Portfolio::find($portfolio->id);
         // $userTag->tags()->sync(request('tags_id[]'));
@@ -125,12 +125,11 @@ class PortfolioController extends Controller
 
         $uploadedFiles=$request->pics;
         foreach($uploadedFiles as $file){
-            $filename=$file->store('portfolio_images', 's3');
+            $file->store('portfolio_images', 's3');
         }
 
         return response()->json([
             'status' => "success",
-            'image_name'=>Storage::disk('s3')->url($filename)
         ]);
     }
 }
