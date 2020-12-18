@@ -107,9 +107,9 @@ class PortfolioController extends Controller
         $portfolio->category_id = $request->get('category_id');
         $portfolio->save();
 
-        $portfolioTag = Portfolio::find($portfolio->id);
-        $portfolioTag->tags()->sync(request('tags_id'));
-        $portfolioTag->save();
+        $userTag = Portfolio::find($portfolio->id);
+        $userTag->tags()->sync(request('tags_id[]'));
+        $userTag->save();
 
         // if ($request->has('portfolio_images')) {
             $images_urls = [];
