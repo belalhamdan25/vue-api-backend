@@ -108,10 +108,12 @@ class PortfolioController extends Controller
 
         $portfolio->save();
 
-            $tagsId=$request->get('pTags');
+            $tagsId=$request->tagsId;
             for($i=0;$i<count($tagsId);$i++){
                 $portfolio->tags()->attach($request->pTags[$i]);
             }
+
+
         // $portfolio->tags()->attach($request->get('pTags'));
 
 
