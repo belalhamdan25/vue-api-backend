@@ -121,7 +121,7 @@ class PortfolioController extends Controller
 
             $tagsId=$request->get('tag');
             for($i=0;$i<count($tagsId);$i++){
-                $portfolio->tags()->attach($request->pTags[$i]);
+                $portfolio->tags()->attach($request->tag[$i]);
             }
 
 
