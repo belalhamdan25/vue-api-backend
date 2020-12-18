@@ -111,7 +111,7 @@ class PortfolioController extends Controller
         $portfolioTag->tags()->sync(request('tags_id'));
         $portfolioTag->save();
 
-        if ($request->has('portfolio_images')) {
+        // if ($request->has('portfolio_images')) {
             $images_urls = [];
             for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
                 $portfolioImage_name = new PortfolioImage;
@@ -124,9 +124,9 @@ class PortfolioController extends Controller
                 $portfolioImage_name->save();
                 array_push($images_urls, $portfolioImage_url);
             }
-        }else{
-            return response()->json(['message' => 'No'], 400);
-        }
+        // }else{
+        //     return response()->json(['message' => 'No'], 400);
+        // }
 
 
         return response()->json([
