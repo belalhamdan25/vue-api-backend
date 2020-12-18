@@ -108,11 +108,8 @@ class PortfolioController extends Controller
 
         $portfolio->save();
 
-            $userTag = Portfolio::where('id', $portfolio->id)
-            ->first();
-        // $userTag = Portfolio::find($portfolio->id);
-        $userTag->tags()->sync($request->get('pTags'));
-        $userTag->save();
+        $portfolio->tags()->sync($request->get('pTags'));
+
 
         // $images_urls = [];
         // for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
