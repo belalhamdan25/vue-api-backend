@@ -126,6 +126,7 @@ class PortfolioController extends Controller
         $uploadedFiles=$request->pics;
         foreach($uploadedFiles as $file){
             $imageName=$file->store('portfolio_images', 's3');
+             Storage::disk('s3')->setVisibility($imageName, 'public');
             $portfolio_image = new PortfolioImage;
             $portfolio_image->portfolio_id=$portfolio->id;
             $portfolio_image->name=Storage::disk('s3')->url($imageName);
