@@ -96,20 +96,20 @@ class PortfolioController extends Controller
 
     public function portfoliosCreate(Request $request)
     {
-        // $user = Auth::user();
+        $user = Auth::user();
 
-        // $portfolio = new Portfolio;
-        // $portfolio->user_id = $user->id;
-        // $portfolio->title = $request->get('title');
-        // $portfolio->desc = $request->get('desc');
-        // $portfolio->link = $request->get('link');
-        // $portfolio->date = $request->get('date');
-        // $portfolio->category_id = $request->get('category_id');
-        // $portfolio->save();
+        $portfolio = new Portfolio;
+        $portfolio->user_id = $user->id;
+        $portfolio->title = $request->get('title');
+        $portfolio->desc = $request->get('desc');
+        $portfolio->link = $request->get('link');
+        $portfolio->date = $request->get('date');
+        $portfolio->category_id = $request->get('category_id');
+        $portfolio->save();
 
-        // $userTag = Portfolio::find($portfolio->id);
-        // $userTag->tags()->sync(request('tags_id[]'));
-        // $userTag->save();
+        $userTag = Portfolio::find($portfolio->id);
+        $userTag->tags()->sync(request('tags_id[]'));
+        $userTag->save();
 
         // $images_urls = [];
         // for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
