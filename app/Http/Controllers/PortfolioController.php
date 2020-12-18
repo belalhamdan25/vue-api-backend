@@ -96,38 +96,42 @@ class PortfolioController extends Controller
 
     public function portfoliosCreate(Request $request)
     {
-            $user = Auth::user();
+        $user = Auth::user();
 
-           $portfolio = New Portfolio;
-           $portfolio->user_id=$user->id;
-           $portfolio->title=$request->get('title');
-           $portfolio->desc=$request->get('desc');
-           $portfolio->link=$request->get('link');
-           $portfolio->date=$request->get('date');
-           $portfolio->category_id=$request->get('category_id');
-           $portfolio->save();
+        $portfolio = new Portfolio;
+        $portfolio->user_id = $user->id;
+        $portfolio->title = $request->get('title');
+        $portfolio->desc = $request->get('desc');
+        $portfolio->link = $request->get('link');
+        $portfolio->date = $request->get('date');
+        $portfolio->category_id = $request->get('category_id');
+        $portfolio->save();
 
-           $portfolioTag = Portfolio::find($portfolio->id);
-           $portfolioTag->tags()->sync(request('tags_id'));
-           $portfolioTag->save();
+        $portfolioTag = Portfolio::find($portfolio->id);
+        $portfolioTag->tags()->sync(request('tags_id'));
+        $portfolioTag->save();
 
-        $images_urls=[];
-                for($i=0;$i<count($request->portfolioImages_name);$i++){
-                    $portfolioImage_name = New PortfolioImage;
-                    // $imageName = $request->file('portfolioImages_name')->store('portfolio_images', 's3');
-                    $imageName = $request->portfolioImages_name[$i]->store('portfolio_images','s3');
-                    $portfolioImage_name->portfolio_id=$portfolio->id;
-                    $portfolioImage_name->name=Storage::disk('s3')->url($imageName);
-                    $portfolioImage_url=Storage::disk('s3')->url($imageName);
-                    Storage::disk('s3')->setVisibility($imageName,'public');
-                    $portfolioImage_name->save();
-                    array_push($images_urls,$portfolioImage_url);
+        if ($request->has('portfolio_images')) {
+            $images_urls = [];
+            for ($i = 0; $i < count($request->portfolioImages_name); $i++) {
+                $portfolioImage_name = new PortfolioImage;
+                // $imageName = $request->file('portfolioImages_name')->store('portfolio_images', 's3');
+                $imageName = $request->portfolioImages_name[$i]->store('portfolio_images', 's3');
+                $portfolioImage_name->portfolio_id = $portfolio->id;
+                $portfolioImage_name->name = Storage::disk('s3')->url($imageName);
+                $portfolioImage_url = Storage::disk('s3')->url($imageName);
+                Storage::disk('s3')->setVisibility($imageName, 'public');
+                $portfolioImage_name->save();
+                array_push($images_urls, $portfolioImage_url);
+            }
+        }else{
+            return response()->json(['message' => 'No'], 400);
         }
 
-      return response()->json([
-            'portfolio'=>$portfolio,
+
+        return response()->json([
+            'portfolio' => $portfolio,
             'portfolioImages_name' => $images_urls,
         ]);
-
     }
 }
