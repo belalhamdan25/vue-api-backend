@@ -128,8 +128,7 @@ class PortfolioController extends Controller
             $file->store('portfolio_images', 's3');
         }
 
-        return response()->json([
-            'status' => "success",
-        ]);
+        return response(['status'=>'success'],200);
+
     }
 }
