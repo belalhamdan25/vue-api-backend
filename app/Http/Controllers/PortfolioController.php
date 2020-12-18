@@ -119,7 +119,7 @@ class PortfolioController extends Controller
             $portfolio_image->save();
         }
 
-            $tagsId=$request->get('date');
+            $tagsId=$request->get('tag');
             for($i=0;$i<count($tagsId);$i++){
                 $portfolio->tags()->attach($request->pTags[$i]);
             }
