@@ -108,7 +108,7 @@ class PortfolioController extends Controller
 
         $portfolio->save();
 
-        $portfolio->tags()->sync($request->get('pTags'));
+        $portfolio->tags()->attach($request->get('pTags'));
 
 
         // $images_urls = [];
