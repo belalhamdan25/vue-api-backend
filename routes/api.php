@@ -108,6 +108,7 @@ Route::group([
     Route::get('my-projects/{id}', 'UserController@myProjects');
     Route::get('my-portfolios/{id}', 'UserController@myPortfolios');
     Route::get('my-transaction/{id}', 'UserController@myTransaction');
+    Route::get('my-offers/{id}', 'UserController@myOffers');
 
 
 });
