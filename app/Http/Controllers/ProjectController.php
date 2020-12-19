@@ -178,7 +178,7 @@ class ProjectController extends Controller
         $offer->desc =  request('desc');
         $offer->status =  "awaiting approval";
         $offer->project_id =request('project_id');
-        $offer->user_id = $user->id;
+        $offer->user_id = request('project_id');
         $offer->save();
 
 
