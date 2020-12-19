@@ -144,7 +144,7 @@ class ProjectController extends Controller
         $project->status = "open";
         $project->category_id = $request->get('category');
 
-        $$project->save();
+        $project->save();
 
         $uploadedFiles=$request->attachs;
         foreach($uploadedFiles as $file){
