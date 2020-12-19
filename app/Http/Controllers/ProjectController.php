@@ -146,21 +146,23 @@ class ProjectController extends Controller
 
         $project->save();
 
+        $tagsId=$request->get('tag');
+        for($i=0;$i<count($tagsId);$i++){
+            $project->tags()->attach($request->tag[$i]);
+        }
+
         $uploadedFiles=$request->attachs;
         foreach($uploadedFiles as $file){
             $imageName=$file->store('projects_attachments', 's3');
              Storage::disk('s3')->setVisibility($imageName, 'public');
             $attachment = new ProjectAttachment;
             $attachment->project_id=$project->id;
-            $attachment->name=$imageName;
+            $attachment->name=basename($imageName);
             $attachment->link=Storage::disk('s3')->url($imageName);
             $attachment->save();
         }
 
-            $tagsId=$request->get('tag');
-            for($i=0;$i<count($tagsId);$i++){
-                $project->tags()->attach($request->tag[$i]);
-            }
+
 
         return response(['status'=>'success'],200);
     }
