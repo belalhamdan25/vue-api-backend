@@ -168,7 +168,7 @@ class ProjectController extends Controller
         return response(['status'=>'success'],200);
     }
 
-    public function ProjectOffer(Request $request){
+    public function createOffer(Request $request){
         $user = Auth::user();
 
         $offer= New ProjectOffer;
@@ -178,7 +178,7 @@ class ProjectController extends Controller
         $offer->desc =  request('desc');
         $offer->status =  "awaiting approval";
         $offer->project_id =request('project_id');
-        $offer->user_id = request('project_id');
+        $offer->user_id = request('user_id');
         $offer->save();
 
 
