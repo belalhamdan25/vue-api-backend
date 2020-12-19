@@ -96,10 +96,11 @@ class DatabaseSeeder extends Seeder
         // $u=1;
         for ($i = 0; $i < 450; $i++) {
             PortfolioImage::create(array(
-                'name' => $faker->imageUrl($width = 640, $height = 480),
+                // 'name' => $faker->imageUrl($width = 640, $height = 480),
                 // 'name' => "https://loremflickr.com/640/480",
                 // 'name' => "https://loremflickr.com/640/480?lock=$u",
                 // 'name' => "https://picsum.photos/id/$u/640/480",
+                'name' => "https://via.placeholder.com/640x480",
                 'portfolio_id' => App\Portfolio::find($z)->id,
             ));
             $z++;
