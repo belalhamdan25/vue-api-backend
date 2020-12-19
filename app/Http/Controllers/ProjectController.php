@@ -151,7 +151,7 @@ class ProjectController extends Controller
             $imageName=$file->store('projects_attachments', 's3');
              Storage::disk('s3')->setVisibility($imageName, 'public');
             $portfolio_image = new ProjectAttachment;
-            $portfolio_image->portfolio_id=$project->id;
+            $portfolio_image->project_id=$project->id;
             $portfolio_image->name=basename($imageName);
             $portfolio_image->link=Storage::disk('s3')->url($imageName);
             $portfolio_image->save();
