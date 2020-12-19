@@ -127,6 +127,7 @@ class DatabaseSeeder extends Seeder
             ProjectOffer::create(array(
                 'timeline' => $faker->randomDigitNot(0),
                 'coast' => $faker->numberBetween(1000,10000),
+                'profit' => $faker->numberBetween(1000,10000),
                 'desc' => $faker->paragraph,
                 'status' => $faker->randomElement(['awaiting approval','in proccess','finished']),
                 'project_id' => Project::find($l)->id,

@@ -17,6 +17,7 @@ class CreateProjectOffersTable extends Migration
             $table->id();
             $table->string('timeline');
             $table->integer('coast');
+            $table->integer('profit');
             $table->text('desc');
             $table->string('status');
             $table->integer('project_id');

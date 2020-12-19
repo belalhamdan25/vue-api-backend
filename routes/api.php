@@ -76,6 +76,7 @@ Route::group([
     Route::get('project-show/{id}', 'ProjectController@projectShow');
     Route::post('project-show-offers', 'ProjectController@projectShowOffers');
     Route::post('create', 'ProjectController@projectCreate');
+    Route::post('create-offer', 'ProjectController@createOffer');
 
 });
 

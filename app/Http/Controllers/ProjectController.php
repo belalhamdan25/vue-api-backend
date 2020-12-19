@@ -11,6 +11,7 @@ use App\Category;
 use App\Tag;
 use App\ProjectAttachment;
 use Auth;
+use App\ProjectOffer;
 class ProjectController extends Controller
 {
     public function all(){
@@ -165,6 +166,25 @@ class ProjectController extends Controller
 
 
         return response(['status'=>'success'],200);
+    }
+
+    public function ProjectOffer(Request $request){
+        $user = Auth::user();
+
+        $offer= New ProjectOffer;
+        $offer->timeline =  request('timeline');
+        $offer->coast =  request('coast');
+        $offer->profit =  request('profit');
+        $offer->desc =  request('desc');
+        $offer->status =  "awaiting approval";
+        $offer->project_id =request('project_id');
+        $offer->user_id = $user->id;
+        $offer->save();
+
+
+        return response()->json([
+            'status' => 'success',
+        ], 200);
     }
 
 }
