@@ -75,6 +75,7 @@ Route::group([
     Route::post('budget-filter', 'ProjectController@budgetFilter');
     Route::get('project-show/{id}', 'ProjectController@projectShow');
     Route::post('project-show-offers', 'ProjectController@projectShowOffers');
+    Route::post('create', 'ProjectController@projectCreate');
 
 });
 

@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Resources\Projects\ProjectCollection;
 use App\Http\Resources\Projects\ProjectResource;
-
+use Illuminate\Support\Facades\Storage;
 use App\Category;
 use App\Tag;
-
+use App\ProjectAttachment;
+use Auth;
 class ProjectController extends Controller
 {
     public function all(){
@@ -131,6 +132,37 @@ class ProjectController extends Controller
         $projectFindOffers = $projectFind->projectOffers()->with('user')->orderBy('id', 'asc')
         ->get();
         return $projectFindOffers;
+    }
+    public function projectCreate(Request $request){
+        $user = Auth::user();
+        $project = new Project;
+        $project->user_id = $user->id;
+        $project->title = $request->get('title');
+        $project->desc = $request->get('desc');
+        $project->budget = $request->get('budget');
+        $project->timeline = $request->get('timeline');
+        $project->status = "open";
+        $project->category_id = $request->get('category');
+
+        $$project->save();
+
+        $uploadedFiles=$request->attachs;
+        foreach($uploadedFiles as $file){
+            $imageName=$file->store('projects_attachments', 's3');
+             Storage::disk('s3')->setVisibility($imageName, 'public');
+            $attachment = new ProjectAttachment;
+            $attachment->project_id=$project->id;
+            $attachment->name=$imageName;
+            $attachment->link=Storage::disk('s3')->url($imageName);
+            $attachment->save();
+        }
+
+            $tagsId=$request->get('tag');
+            for($i=0;$i<count($tagsId);$i++){
+                $project->tags()->attach($request->tag[$i]);
+            }
+
+        return response(['status'=>'success'],200);
     }
 
 }
