@@ -140,7 +140,7 @@ class ProjectController extends Controller
         $project->title = $request->get('title');
         $project->desc = $request->get('desc');
         $project->budget = $request->get('budget');
-        $project->timeline = $request->get('timeline');
+        $project->time_line = $request->get('timeline');
         $project->status = "open";
         $project->category_id = $request->get('category');
 
