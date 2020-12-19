@@ -67,11 +67,6 @@ class UserController extends Controller
         return $transaction;
 
     }
-    public function myOffers(User $id)
-    {
-        $user = User::find($id->id);
-        return $user->projectOffers;
 
-    }
 
 }
