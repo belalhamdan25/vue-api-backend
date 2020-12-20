@@ -15,9 +15,7 @@ use App\ProjectOffer;
 class ProjectController extends Controller
 {
     public function all(){
-
-        return ProjectCollection::collection(Project::orderBy('id', 'desc')->paginate(18));
-
+        return ProjectCollection::collection(Project::orderBy('id', 'desc')->where('status','open')->orWhere('status','in proccess')->paginate(10));
     }
 
     public function search(Request $request)
