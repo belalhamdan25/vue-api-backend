@@ -25,7 +25,7 @@ class ProjectController extends Controller
 
         if ($request->has('q')) {
 
-            $projectId=Project::where('title', 'like', '%' . $request->get('q') . '%')->pluck('id')->toArray();
+            $projectId=Project::where('title', 'like', '%' . $request->get('q') . '%')->where('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
 
             for($i = 0; $i < count($projectId); $i++){
                 $ProjectFindSearch= new ProjectCollection(Project::find($projectId[$i]));
@@ -51,10 +51,10 @@ class ProjectController extends Controller
         $projectsId=[];
 
         if(gettype($request->get('cq'))=="integer"){
-            $categoryId = Category::where('id', $request->get('cq'))->pluck('id')->toArray();
+            $categoryId = Category::where('id', $request->get('cq'))->orWhere('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
 
         }else{
-            $categoryId = Category::whereIn('name', $request->get('cq'))->pluck('id')->toArray();
+            $categoryId = Category::whereIn('name', $request->get('cq'))->orWhere('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
         }
 
          for($i = 0; $i < count($categoryId); $i++){
