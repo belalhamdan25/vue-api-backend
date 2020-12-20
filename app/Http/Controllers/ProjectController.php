@@ -51,15 +51,15 @@ class ProjectController extends Controller
         $projectsId=[];
 
         if(gettype($request->get('cq'))=="integer"){
-            $categoryId = Category::where('id', $request->get('cq'))->orWhere('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
+            $categoryId = Category::where('id', $request->get('cq'))->pluck('id')->toArray();
 
         }else{
-            $categoryId = Category::whereIn('name', $request->get('cq'))->orWhere('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
+            $categoryId = Category::whereIn('name', $request->get('cq'))->pluck('id')->toArray();
         }
 
          for($i = 0; $i < count($categoryId); $i++){
             $categoryfind = Category::find($categoryId[$i]);
-            $projectResultsId= $categoryfind->projects()->pluck('id')->toArray();
+            $projectResultsId= $categoryfind->projects()->where('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
             array_push($projectsId, $projectResultsId);
 
          }
