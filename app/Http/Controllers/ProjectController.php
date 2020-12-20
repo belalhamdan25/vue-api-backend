@@ -84,7 +84,7 @@ class ProjectController extends Controller
          $tagId = Tag::whereIn('name', $request->get('sq'))->pluck('id')->toArray();
          for($i = 0; $i < count($tagId); $i++){
             $tagfind = Tag::find($tagId[$i]);
-            $projectResultsId= $tagfind->projects()->pluck('id')->toArray();
+            $projectResultsId= $tagfind->projects()->where('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
             array_push($projectsId, $projectResultsId);
 
          }
@@ -105,7 +105,7 @@ class ProjectController extends Controller
 
         $tagId = Tag::where('name', $request->get('skq'))->pluck('id')->first();
         $tagFind=Tag::find($tagId);
-        $projectResultsId= $tagFind->projects()->pluck('id')->toArray();
+        $projectResultsId= $tagFind->projects()->where('status','open')->orWhere('status','in proccess')->pluck('id')->toArray();
 
 
         for($i=0;$i<count($projectResultsId);$i++){
@@ -118,7 +118,7 @@ class ProjectController extends Controller
 
     public function budgetFilter(Request $request)
     {
-        return ProjectCollection::collection(Project::whereBetween('budget',$request->get('bq'))->orderBy('id', 'desc')->get());
+        return ProjectCollection::collection(Project::whereBetween('budget',$request->get('bq'))->where('status','open')->orWhere('status','in proccess')->orderBy('id', 'desc')->get());
     }
 
     public function projectShow(Project $id){
