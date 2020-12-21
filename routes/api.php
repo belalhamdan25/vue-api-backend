@@ -124,15 +124,4 @@ Route::group([
 
 });
 
-Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'message'
-
-], function ($router) {
-
-    Route::resource('messages', 'MessageController');
-
-
-});
 
