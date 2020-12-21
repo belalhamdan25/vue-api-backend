@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             PortfolioImageSeeder::class,
             ProjectAttachmentSeeder::class,
             ProjectOfferSeeder::class,
-            project_tagSeeder::class
+            project_tagSeeder::class,
+            adminUserSeeder::class
         ]);
 
 
