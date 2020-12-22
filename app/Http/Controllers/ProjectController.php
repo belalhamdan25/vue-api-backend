@@ -185,4 +185,11 @@ class ProjectController extends Controller
         ], 200);
     }
 
+    public function projectDelete(Project $id){
+        $id->delete();
+        return response()->json([
+            'status' => 'deleted',
+        ], 200);
+    }
+
 }
