@@ -191,5 +191,12 @@ class ProjectController extends Controller
             'status' => 'deleted',
         ], 200);
     }
+    public function closeProject(Project $id){
+        $id->status="closed";
+        $id->save();
+        return response()->json([
+            'status' => 'closed',
+        ], 200);
+    }
 
 }
