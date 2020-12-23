@@ -226,12 +226,11 @@ class ProjectController extends Controller
 
 
 
-        if ($request->hasFile('tag')) {
             $tagsId=$request->get('tag');
             for($i=0;$i<count($tagsId);$i++){
                 $id->tags()->attach($request->tag[$i]);
             }
-        }
+
 
 
 
