@@ -143,4 +143,48 @@ class PortfolioController extends Controller
         return response(['status'=>'success'],200);
 
     }
+    public function portfoliosDelete(Portfolio $id){
+        $id->delete();
+        return response()->json([
+            'status' => 'deleted',
+        ], 200);
+    }
+
+    public function portfoliosEdit(Request $request,Portfolio $id)
+    {
+
+        $id->title = $request->get('title');
+        $id->desc = $request->get('desc');
+        $id->link = $request->get('link');
+        $id->date = $request->get('date');
+        $id->category_id = $request->get('category_id');
+        $id->save();
+
+
+        if ($request->hasFile('pics')) {
+            $id->portfolioImages()->delete();
+        $uploadedFiles=$request->pics;
+        foreach($uploadedFiles as $file){
+            $imageName=$file->store('portfolio_images', 's3');
+             Storage::disk('s3')->setVisibility($imageName, 'public');
+            $portfolio_image = new PortfolioImage;
+            $portfolio_image->portfolio_id=$id->id;
+            $portfolio_image->name=Storage::disk('s3')->url($imageName);
+            $portfolio_image->save();
+        }
+    }
+
+            $tagsId=$request->get('tag');
+            $id->tags()->detach();
+            for($i=0;$i<count($tagsId);$i++){
+                $id->tags()->attach($request->tag[$i]);
+            }
+
+
+
+        return response(['status'=>'success'],200);
+
+    }
+
+
 }
