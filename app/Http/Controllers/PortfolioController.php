@@ -173,13 +173,14 @@ class PortfolioController extends Controller
             $portfolio_image->save();
         }
     }
+    if ($request->hasFile('tag')) {
 
             $tagsId=$request->get('tag');
             $id->tags()->detach();
             for($i=0;$i<count($tagsId);$i++){
                 $id->tags()->attach($request->tag[$i]);
             }
-
+        }
 
 
         return response(['status'=>'success'],200);
