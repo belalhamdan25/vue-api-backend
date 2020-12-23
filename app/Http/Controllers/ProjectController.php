@@ -200,25 +200,14 @@ class ProjectController extends Controller
     }
 
     public function editProject(Project $id,Request $request){
-        if ($request->hasFile('title')) {
-            $id->title = $request->get('title');
-        }
-        if ($request->hasFile('desc')) {
-            $id->desc = $request->get('desc');
-        }
-        if ($request->hasFile('title')) {
-            $id->title = $request->get('title');
-        }
-        if ($request->hasFile('budget')) {
-            $id->budget = $request->get('budget');
-        }
-        if ($request->hasFile('timeline')) {
-            $id->time_line = $request->get('timeline');
-        }
-        if ($request->hasFile('category')) {
-            $id->category_id = $request->get('category');
-        }
-
+        $user = Auth::user();
+        $id->user_id = $user->id;
+        $id->title = $request->get('title');
+        $id->desc = $request->get('desc');
+        $id->budget = $request->get('budget');
+        $id->time_line = $request->get('timeline');
+        $id->status = "open";
+        $id->category_id = $request->get('category');
         $id->save();
 
         if ($request->hasFile('pics')) {
@@ -234,6 +223,7 @@ class ProjectController extends Controller
                 $portfolio_image->save();
             }
         }
+
 
 
         if ($request->hasFile('tag')) {
