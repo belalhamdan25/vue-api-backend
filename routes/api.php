@@ -79,7 +79,7 @@ Route::group([
     Route::post('create-offer', 'ProjectController@createOffer');
     Route::get('project-delete/{id}', 'ProjectController@projectDelete');
     Route::post('close-project/{id}', 'ProjectController@closeProject');
-
+    Route::post('edit-project/{id}', 'ProjectController@editProject');
 });
 
 

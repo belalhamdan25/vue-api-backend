@@ -199,4 +199,54 @@ class ProjectController extends Controller
         ], 200);
     }
 
+    public function editProject(Project $id,Request $request){
+        if ($request->hasFile('title')) {
+            $id->title = $request->get('title');
+        }
+        if ($request->hasFile('desc')) {
+            $id->desc = $request->get('desc');
+        }
+        if ($request->hasFile('title')) {
+            $id->title = $request->get('title');
+        }
+        if ($request->hasFile('budget')) {
+            $id->budget = $request->get('budget');
+        }
+        if ($request->hasFile('timeline')) {
+            $id->time_line = $request->get('timeline');
+        }
+        if ($request->hasFile('category')) {
+            $id->category_id = $request->get('category');
+        }
+
+        $id->save();
+
+        if ($request->hasFile('pics')) {
+            $id->projectAttachments()->delete();
+            $uploadedFiles=$request->pics;
+            foreach($uploadedFiles as $file){
+                $imageName=$file->store('projects_attachments', 's3');
+                 Storage::disk('s3')->setVisibility($imageName, 'public');
+                $portfolio_image = new ProjectAttachment;
+                $portfolio_image->project_id=$id->id;
+                $portfolio_image->name=basename($imageName);
+                $portfolio_image->link=Storage::disk('s3')->url($imageName);
+                $portfolio_image->save();
+            }
+        }
+
+
+        if ($request->hasFile('tag')) {
+            $tagsId=$request->get('tag');
+            for($i=0;$i<count($tagsId);$i++){
+                $id->tags()->attach($request->tag[$i]);
+            }
+        }
+
+
+
+
+        return response(['status'=>'success'],200);
+    }
+
 }

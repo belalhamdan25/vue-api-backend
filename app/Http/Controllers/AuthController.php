@@ -62,11 +62,7 @@ class AuthController extends Controller
         $user->user_img = request('user_img');
         $user->balance = 0;
 
-
-
-
         $user->save();
-
 
         // User::create([
         //     'first_name' => request('first_name'),
