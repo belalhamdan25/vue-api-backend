@@ -200,24 +200,18 @@ class ProjectController extends Controller
     }
 
     public function editProject(Project $id,Request $request){
-        if ($request->hasFile('title')) {
             $id->title = $request->get('title');
-        }
-        if ($request->hasFile('desc')) {
+
             $id->desc = $request->get('desc');
-        }
-        if ($request->hasFile('title')) {
+
             $id->title = $request->get('title');
-        }
-        if ($request->hasFile('budget')) {
+
             $id->budget = $request->get('budget');
-        }
-        if ($request->hasFile('timeline')) {
+
             $id->time_line = $request->get('timeline');
-        }
-        if ($request->hasFile('category')) {
+
             $id->category_id = $request->get('category');
-        }
+
 
         $id->save();
 
@@ -236,12 +230,11 @@ class ProjectController extends Controller
         }
 
 
-        if ($request->hasFile('tag')) {
             $tagsId=$request->get('tag');
             for($i=0;$i<count($tagsId);$i++){
                 $id->tags()->attach($request->tag[$i]);
             }
-        }
+
 
 
 
