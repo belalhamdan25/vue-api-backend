@@ -200,15 +200,15 @@ class ProjectController extends Controller
     }
 
     public function editProject(Project $id,Request $request){
-        $user = Auth::user();
-        $id->user_id = $user->id;
+
+
         $id->title = $request->get('title');
         $id->desc = $request->get('desc');
         $id->budget = $request->get('budget');
         $id->time_line = $request->get('timeline');
-        $id->status = "open";
         $id->category_id = $request->get('category');
-        $id->save();
+
+        $id->update();
 
         if ($request->hasFile('pics')) {
             $id->projectAttachments()->delete();
