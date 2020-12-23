@@ -59,7 +59,7 @@ Route::group([
     Route::get('portfolios/skills-filter-id-names/', 'TagController@skillsFilterNamesIds');
     Route::post('portfolios/create/', 'PortfolioController@portfoliosCreate');
     Route::post('portfolios/edit/{id}', 'PortfolioController@portfoliosEdit');
-    Route::post('portfolios/delete', 'PortfolioController@portfoliosDelete');
+    Route::post('portfolios/delete/{id}', 'PortfolioController@portfoliosDelete');
 });
 
 Route::group([
