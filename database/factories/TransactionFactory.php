@@ -19,9 +19,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Transaction::class, function (Faker $faker) {
     static $password;
-
     return [
-        'desc' =>  $faker->sentence,
+        'desc' =>  $faker->randomElement(['Transfer','Pay','Charge']),
         'amount' => $faker->numberBetween(100,5000),
         'user_id' => function(){
             return App\User::all()->random()->id;
