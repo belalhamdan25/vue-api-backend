@@ -251,8 +251,8 @@ class ProjectController extends Controller
         $ownerProfit=$coast-$profit;
 
         if($userBuyerbalance >= $coast){
-            $userBuyer->balnce=$userBuyerbalance - $coast;
-            $userVendor->balnce= $userVendor->balnce + $profit;
+            $userBuyer->balance=$userBuyerbalance - $coast;
+            $userVendor->balance= $userVendor->balance + $profit;
             // profit for website owner $ownerProfit;
             $userBuyer->save();
             $userVendor->save();
@@ -268,6 +268,10 @@ class ProjectController extends Controller
             $transaction->amount = $profit;
             $transaction->user_id = $userVendor->id;
             $transaction->save();
+
+            return response()->json([
+                'status' => 'success',
+            ]);
 
 
         }else{
