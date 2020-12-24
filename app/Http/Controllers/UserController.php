@@ -47,7 +47,7 @@ class UserController extends Controller
             'offerStatusInProccessCount'=>$offerStatus->where('status','in proccess')->count(),
             'offerStatusFinishedCount'=>$offerStatus->where('status','finished')->count(),
             'offerStatusCount'=>$offerStatus->count(),
-            'projectPurchase'=>$projectPurchase->count(),
+            'projectPurchase'=>$projectPurchase->purchases()->count(),
         ],200);
 
     }
