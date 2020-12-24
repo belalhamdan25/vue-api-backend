@@ -257,17 +257,17 @@ class ProjectController extends Controller
             $userBuyer->save();
             $userVendor->save();
 
-            $transaction = new Transaction;
-            $transaction->desc = "Pay";
-            $transaction->amount = $coast;
-            $transaction->user_id = $userBuyer->id;
-            $transaction->save();
+            // $transaction = new Transaction;
+            // $transaction->desc = "Pay";
+            // $transaction->amount = $coast;
+            // $transaction->user_id = $userBuyer->id;
+            // $transaction->save();
 
-            $transaction = new Transaction;
-            $transaction->desc = "Transfer";
-            $transaction->amount = $profit;
-            $transaction->user_id = $userVendor->id;
-            $transaction->save();
+            // $transaction = new Transaction;
+            // $transaction->desc = "Transfer";
+            // $transaction->amount = $profit;
+            // $transaction->user_id = $userVendor->id;
+            // $transaction->save();
 
             return response()->json([
                 'status' => 'success',
@@ -276,7 +276,7 @@ class ProjectController extends Controller
 
         }else{
             return response()->json([
-                'status' => 'blance not',
+                'status' => 'balance issue',
             ]);
         }
 
