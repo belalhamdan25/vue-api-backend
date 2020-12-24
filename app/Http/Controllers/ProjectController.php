@@ -12,6 +12,8 @@ use App\Tag;
 use App\ProjectAttachment;
 use Auth;
 use App\ProjectOffer;
+use App\User;
+use App\Transaction;
 class ProjectController extends Controller
 {
     public function all(){
@@ -237,6 +239,43 @@ class ProjectController extends Controller
 
 
         return response(['status'=>'success'],200);
+    }
+
+    public function acceptOffer(Request $request){
+        $userBuyer=User::find($request->get('userBuyer'));
+        $userVendor=User::find($request->get('userVendor'));
+
+        $userBuyerbalance=$userBuyer->balance;
+        $coast=$request->get('coast');
+        $profit=$request->get('profit');
+        $ownerProfit=$coast-$profit;
+
+        if($userBuyerbalance >= $coast){
+            $userBuyer->balnce=$userBuyerbalance - $coast;
+            $userVendor->balnce= $userVendor->balnce + $profit;
+            // profit for website owner $ownerProfit;
+            $userBuyer->save();
+            $userVendor->save();
+
+            $transaction = new Transaction;
+            $transaction->desc = "Pay";
+            $transaction->amount = $coast;
+            $transaction->user_id = $userBuyer->id;
+            $transaction->save();
+
+            $transaction = new Transaction;
+            $transaction->desc = "Transfer";
+            $transaction->amount = $profit;
+            $transaction->user_id = $userVendor->id;
+            $transaction->save();
+
+
+        }else{
+            return response()->json([
+                'status' => 'blance not',
+            ]);
+        }
+
     }
 
 }

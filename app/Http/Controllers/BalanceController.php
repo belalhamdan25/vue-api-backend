@@ -13,7 +13,7 @@ class BalanceController extends Controller
         $user->save();
 
         $transaction = new Transaction;
-        $transaction->desc = "charge amount";
+        $transaction->desc = "Charge";
         $transaction->amount = request('amount');
         $transaction->user_id = $user->id;
         $transaction->save();
