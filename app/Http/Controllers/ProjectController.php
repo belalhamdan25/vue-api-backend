@@ -244,6 +244,7 @@ class ProjectController extends Controller
     public function acceptOffer(Request $request){
         $userBuyer=User::find($request->get('userBuyer'));
         $userVendor=User::find($request->get('userVendor'));
+        $project=Project::find($request->get('project'));
 
         $userBuyerbalance=$userBuyer->balance;
         $coast=$request->get('coast');
@@ -253,9 +254,11 @@ class ProjectController extends Controller
         if($userBuyerbalance >= $coast){
             $userBuyer->balance=$userBuyerbalance - $coast;
             $userVendor->balance= $userVendor->balance + $profit;
+            $project->status='in proccess';
             // profit for website owner $ownerProfit;
             $userBuyer->save();
             $userVendor->save();
+            $project->save();
 
             $transaction = new Transaction;
             $transaction->desc = "Pay";
