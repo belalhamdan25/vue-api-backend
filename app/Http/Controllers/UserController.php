@@ -24,6 +24,7 @@ class UserController extends Controller
         $offers_count=User::find($id->id);
         $balance=User::find($id->id);
         $projectStatus=User::find($id->id);
+        $projectPurchase=User::find($id->id);
         $offerStatus=ProjectOffer::where('user_id',$id->id)->select('status')->get();
 
 
@@ -46,6 +47,7 @@ class UserController extends Controller
             'offerStatusInProccessCount'=>$offerStatus->where('status','in proccess')->count(),
             'offerStatusFinishedCount'=>$offerStatus->where('status','finished')->count(),
             'offerStatusCount'=>$offerStatus->count(),
+            'projectPurchase'=>$projectPurchase->count(),
         ],200);
 
     }
