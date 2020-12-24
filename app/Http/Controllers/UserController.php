@@ -48,6 +48,9 @@ class UserController extends Controller
             'offerStatusFinishedCount'=>$offerStatus->where('status','finished')->count(),
             'offerStatusCount'=>$offerStatus->count(),
             'projectPurchase'=>$projectPurchase->purchases()->count(),
+            'projectPurchaseStatusProccessCount'=>$projectPurchase->purchases()->select('status')->where('status','in proccess')->count(),
+            'projectPurchaseStatusClosedCount'=>$projectPurchase->purchases()->select('status')->where('status','closed')->count(),
+            'projectPurchaseStatusFinishCount'=>$projectPurchase->purchases()->select('status')->where('status','finished')->count(),
         ],200);
 
     }
