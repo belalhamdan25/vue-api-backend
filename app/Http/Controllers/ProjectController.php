@@ -278,6 +278,7 @@ class ProjectController extends Controller
             $purchase->project_id=$request->get('project');
             $purchase->user_id=$request->get('userBuyer');
             $purchase->worker_id=$request->get('userVendor');
+            $purchase->status='in proccess';
             $purchase->save();
 
 
