@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Http\Resources\Projects\ProjectCollection;
+use App\Http\Resources\Purchases\PurchaseCollection;
 use App\Http\Resources\Projects\ProjectResource;
 use Illuminate\Support\Facades\Storage;
 use App\Category;
@@ -14,6 +15,7 @@ use Auth;
 use App\ProjectOffer;
 use App\User;
 use App\Transaction;
+use App\Purchase;
 class ProjectController extends Controller
 {
     public function all(){
@@ -272,6 +274,13 @@ class ProjectController extends Controller
             $transaction->user_id = $userVendor->id;
             $transaction->save();
 
+            $purchase = new Purchase;
+            $purchase->project_id=$request->get('project');
+            $purchase->user_id=$request->get('userBuyer');
+            $purchase->worker_id=$request->get('userVendor');
+            $purchase->save();
+
+
             return response()->json([
                 'status' => 'success',
             ]);
@@ -282,6 +291,12 @@ class ProjectController extends Controller
                 'status' => 'balance issue',
             ]);
         }
+
+    }
+
+    public function allPhrchases(Request $request){
+
+        return Purchase::where('user_id',$request->get('user_id'))->get();
 
     }
 

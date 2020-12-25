@@ -83,6 +83,7 @@ Route::group([
     Route::post('close-project/{id}', 'ProjectController@closeProject');
     Route::post('edit-project/{id}', 'ProjectController@editProject');
     Route::post('accept-offer', 'ProjectController@acceptOffer');
+    Route::post('all-phrchases', 'ProjectController@allPhrchases');
 });
 
 
