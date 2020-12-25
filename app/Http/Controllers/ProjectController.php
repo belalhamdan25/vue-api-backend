@@ -296,7 +296,11 @@ class ProjectController extends Controller
 
     public function allPhrchases(Request $request){
 
-        return Purchase::where('user_id',$request->get('user_id'))->get();
+         $worker_idz=Purchase::where('user_id',$request->get('user_id'))->pluck('worker_id')->toArray();
+
+         return $user=User::find($worker_idz);
+
+
 
     }
 
