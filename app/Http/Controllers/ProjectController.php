@@ -274,12 +274,12 @@ class ProjectController extends Controller
             $transaction->user_id = $userVendor->id;
             $transaction->save();
 
-            $purchase = new Purchase;
-            $purchase->project_id=$request->get('project');
-            $purchase->user_id=$request->get('userBuyer');
-            $purchase->worker_id=$request->get('userVendor');
-            $purchase->status='in proccess';
-            $purchase->save();
+            // $purchase = new Purchase;
+            // $purchase->project_id=$request->get('project');
+            // $purchase->user_id=$request->get('userBuyer');
+            // $purchase->worker_id=$request->get('userVendor');
+            // $purchase->status='in proccess';
+            // $purchase->save();
 
 
             return response()->json([
@@ -295,14 +295,17 @@ class ProjectController extends Controller
 
     }
 
-    public function allPhrchases(Request $request){
+    // public function allPhrchases(Request $request){
 
-         $worker_idz=Purchase::where('user_id',$request->get('user_id'))->pluck('worker_id')->toArray();
+    //     $worker_idz=Purchase::where('user_id',$request->get('user_id'))->with('user')->get();
 
-         return $user=User::find($worker_idz);
+    //     return $worker_idz;
 
 
 
-    }
+
+
+
+    // }
 
 }

@@ -15,10 +15,10 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('worker_id');
-            $table->integer('project_id');
-            $table->string('status');
+            // $table->integer('user_id');
+            // $table->integer('worker_id');
+            // $table->integer('project_id');
+            // $table->string('status');
             $table->timestamps();
         });
     }
