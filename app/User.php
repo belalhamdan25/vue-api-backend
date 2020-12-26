@@ -40,9 +40,7 @@ class User extends Authenticatable implements JWTSubject
     public function transaction(){
         return $this->hasMany(Transaction::class);
     }
-    // public function purchases(){
-    //     return $this->hasMany(Purchase::class);
-    // }
+
 
 
     use Notifiable;
