@@ -30,9 +30,9 @@
                         <tr>
                             <th>Title</th>
                             <th>Desc</th>
-                            <th>Budget</th>
-                            <th>Time Line</th>
-                            <th>Status</th>
+                            <th>Link</th>
+                            <th>Date</th>
+                            <th>User</th>
                             <th>Category</th>
                         </tr>
                     </thead>
@@ -40,9 +40,9 @@
                         <tr>
                             <th>Title</th>
                             <th>Desc</th>
-                            <th>Budget</th>
-                            <th>Time Line</th>
-                            <th>Status</th>
+                            <th>Link</th>
+                            <th>Date</th>
+                            <th>User</th>
                             <th>Category</th>
                         </tr>
                     </tfoot>
