@@ -2,7 +2,7 @@
 @extends('master')
 
 @section('title')
-<title>Worker - Admin Dashboard</title>
+<title>Worker Admin | Dashboard</title>
 @stop
 
 @section('css')

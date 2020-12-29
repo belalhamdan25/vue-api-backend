@@ -22,11 +22,16 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 
+
 Route::group(['middleware' => 'authenticated'], function () {
+
+    Route::group(['middleware' => 'role'], function () {
 
 
         Route::get('/', 'AdminController@index');
         Route::get('/logout', 'AdminController@logout');
+
+});
 
 });
 
