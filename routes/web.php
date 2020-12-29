@@ -14,3 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::group(['middleware' => 'guest'], function () {
+
+    Route::get('/login', 'AdminController@loginCreate');
+    Route::post('/login', 'AdminController@loginStore');
+
+});
+
+
+Route::group(['middleware' => 'authenticated'], function () {
+
+
+        Route::get('/', 'AdminController@index');
+        Route::get('/logout', 'AdminController@logout');
+
+});
+
+
+
+
+
+
+
+
+
