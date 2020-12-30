@@ -119,26 +119,26 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="/users">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-users"></i>
                     <span>Users</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="/projects">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-file"></i>
                     <span>Projects</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/offers">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-dollar-sign"></i>
                     <span>Offers</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/portfolios">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-image"></i>
                     <span>Portfolios</span></a>
             </li>
 

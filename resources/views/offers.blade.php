@@ -54,7 +54,12 @@
                                             <td>{{$offer->profit}}</td>
                                             <td>{{$offer->desc}}</td>
                                             <td>{{$offer->status}}</td>
-                                            <td>{{$offer->user->first_name}} {{$offer->user->last_name}}</td>
+                                            <td>
+                                                @if(!empty($offer->user))
+                                                {{$offer->user->first_name}}
+                                                {{$offer->user->last_name}}
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

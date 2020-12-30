@@ -53,7 +53,12 @@
                             <td>{{$portfolio->desc}}</td>
                             <td>{{$portfolio->link}}</td>
                             <td>{{$portfolio->date}}</td>
-                            <td>{{$portfolio->user->first_name}} {{$portfolio->user->last_name}}</td>
+                            <td>
+                                @if(!empty($portfolio->user))
+                                {{$portfolio->user->first_name}}
+                                {{$portfolio->user->last_name}}
+                                @endif
+                            </td>
                             <td>{{$portfolio->category->desc}}</td>
                         </tr>
                         @endforeach

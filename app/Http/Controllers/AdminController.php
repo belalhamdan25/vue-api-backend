@@ -7,7 +7,7 @@ use App\User;
 use App\Project;
 use App\ProjectOffer;
 use App\Portfolio;
-
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
@@ -60,6 +60,23 @@ class AdminController extends Controller
 
         return view('users',compact('users'));
     }
+    public function usersDelete(User $id){
+        if ($id->role_name == "admin") {
+            return redirect()->back()->with('adminDelete', 'You cannot delete admin');
+        } else {
+            $id->delete();
+            return redirect()->back()->with('userDeleted', $id->email);
+        }
+    }
+
+    public function usersResetPass(User $id)
+    {
+        $id->password = Hash::make("1234567890");
+        $id->save();
+
+        return redirect()->back()->with('successfulReset', $id->email . ' ' . 'Reset Successful .. password reset is 1234567890');
+    }
+
     public function projectsCreate(){
         $projects=Project::orderBy('id', 'desc')->paginate(10);
 

@@ -31,6 +31,8 @@ Route::group(['middleware' => 'authenticated'], function () {
         Route::get('/', 'AdminController@index');
         Route::get('/logout', 'AdminController@logout');
         Route::get('/users', 'AdminController@usersCreate');
+        Route::get('/users-delete/{id}', 'AdminController@usersDelete');
+        Route::get('/users-reset/{id}', 'AdminController@usersResetPass');
         Route::get('/projects', 'AdminController@projectsCreate');
         Route::get('/offers', 'AdminController@offersCreate');
         Route::get('/portfolios', 'AdminController@portfoliosCreate');

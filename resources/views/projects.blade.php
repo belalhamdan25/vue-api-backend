@@ -33,6 +33,7 @@
                                             <th>Time Line</th>
                                             <th>Status</th>
                                             <th>Category</th>
+                                            <th>User</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -43,6 +44,7 @@
                                             <th>Time Line</th>
                                             <th>Status</th>
                                             <th>Category</th>
+                                            <th>User</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -54,6 +56,12 @@
                                             <td>{{$project->time_line}}</td>
                                             <td>{{$project->status}}</td>
                                             <td>{{$project->category->desc}}</td>
+                                            <td>
+                                                @if(!empty($project->user))
+                                                {{$project->user->first_name}}
+                                                {{$project->user->last_name}}
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

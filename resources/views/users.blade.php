@@ -23,6 +23,22 @@
                             <h6 class="m-0 font-weight-bold text-primary">Users</h6>
                         </div>
                         <div class="card-body">
+
+                            @if(session()->has('adminDelete'))
+                            <div class="alert alert-danger mt4" role="alert">
+                           {{ session()->get('adminDelete') }}
+                            </div>
+                            @endif
+
+                            @if(session()->has('successfulReset'))
+                            <div class="alert alert-success mt4" role="alert">
+                           {{ session()->get('successfulReset') }}
+                            </div>
+                            @endif
+
+
+
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -33,6 +49,8 @@
                                             <th>Category</th>
                                             <th>Role</th>
                                             <th>Country</th>
+                                            <th>Actions</th>
+
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -43,6 +61,7 @@
                                             <th>Category</th>
                                             <th>Role</th>
                                             <th>Country</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -54,6 +73,10 @@
                                             <td>{{$user->category->desc}}</td>
                                             <td>{{$user->role_name}}</td>
                                             <td>{{$user->location}}</td>
+                                            <td>
+                                                <a href="users-delete/{{$user->id}}" class="btn btn-danger">Delete</a>
+                                                <a href="users-reset/{{$user->id}}" class="btn btn-warning">Reset</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
