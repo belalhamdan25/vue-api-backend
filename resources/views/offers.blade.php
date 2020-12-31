@@ -24,6 +24,13 @@
                             <h6 class="m-0 font-weight-bold text-primary">Offers</h6>
                         </div>
                         <div class="card-body">
+
+                            @if(session()->has('ProjectOfferDelete'))
+                            <div class="alert alert-success mt4" role="alert">
+                           {{ session()->get('ProjectOfferDelete') }}
+                            </div>
+                            @endif
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -34,6 +41,7 @@
                                             <th>Desc</th>
                                             <th>Status</th>
                                             <th>User</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -44,6 +52,7 @@
                                             <th>Desc</th>
                                             <th>Status</th>
                                             <th>User</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -59,6 +68,9 @@
                                                 {{$offer->user->first_name}}
                                                 {{$offer->user->last_name}}
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="offer-delete/{{$offer->id}}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach

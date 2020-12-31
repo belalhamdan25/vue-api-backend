@@ -79,10 +79,22 @@ class AdminController extends Controller
         return redirect()->back()->with('successfulReset', $id->email . ' ' . 'Reset Successful .. password reset is 1234567890');
     }
 
+    public function usersSearch(Request $request)
+    {
+        $usersSearch = User::where('email', 'like', '%' . $request->get('usersSearch') . '%')->paginate(10);
+        return view('users-search',compact('usersSearch'));
+
+    }
+
     public function projectsCreate(){
         $projects=Project::orderBy('id', 'desc')->paginate(10);
 
         return view('projects',compact('projects'));
+    }
+
+    public function projectsDelete(Project $id){
+        $id->delete();
+        return redirect()->back()->with('ProjectDelete', $id->title. ' Deleted ' );
     }
 
     public function offersCreate(){
@@ -90,10 +102,21 @@ class AdminController extends Controller
 
         return view('offers',compact('offers'));
     }
+
+    public function offersDelete(ProjectOffer $id){
+        $id->delete();
+        return redirect()->back()->with('ProjectOfferDelete', ' Deleted ' );
+    }
+
     public function portfoliosCreate(){
         $portfolios=Portfolio::orderBy('id', 'desc')->paginate(10);
 
         return view('portfolios',compact('portfolios'));
+    }
+
+    public function portfoliosDelete(Portfolio $id){
+        $id->delete();
+        return redirect()->back()->with('PortfolioDelete', ' Deleted ' );
     }
 
     public function skillsCreate(){
@@ -109,6 +132,10 @@ class AdminController extends Controller
         return redirect()->back()->with('successfulSkillAdd : ', $skill->name);
 
     }
+    public function skillsDelete(Tag $id){
+        $id->delete();
+            return redirect()->back()->with('TagDeleted', $id->name. ' Deleted ' );
+    }
 
     public function categoryCreate(){
         $categories=Category::orderBy('id', 'desc')->paginate(10);
@@ -122,6 +149,11 @@ class AdminController extends Controller
         $category->save();
         return redirect()->back()->with('successfulcategoriesAdd : ', $category->desc);
 
+    }
+
+    public function categoryDelete(Category $id){
+        $id->delete();
+            return redirect()->back()->with('CategoryDelete', $id->desc. ' Deleted ' );
     }
 
 }

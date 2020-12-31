@@ -28,6 +28,12 @@
                                     </div>
                                     @endif
 
+                                    @if(session()->has('CategoryDelete'))
+                                    <div class="alert alert-success mt4" role="alert">
+                                   {{ session()->get('CategoryDelete') }}
+                                    </div>
+                                    @endif
+
                                     <form method="post" action="/category-store" class="form-inline">
                                         {{ csrf_field() }}
 
@@ -50,17 +56,22 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         @foreach ($categories as $category)
                                         <tr>
                                             <td>{{$category->desc}}</td>
+                                            <td>
+                                                <a href="category-delete/{{$category->id}}" class="btn btn-danger">Delete</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

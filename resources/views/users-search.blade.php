@@ -12,7 +12,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">All Users</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Search Users Results</h1>
                     {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
@@ -84,7 +84,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($usersSearch as $user)
                                         <tr>
                                             <td>{{$user->first_name}} {{$user->last_name}}</td>
                                             <td>{{$user->email}}</td>
@@ -101,7 +101,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $users->links()}}
+                            {{ $usersSearch->links()}}
 
                         </div>
                     </div>

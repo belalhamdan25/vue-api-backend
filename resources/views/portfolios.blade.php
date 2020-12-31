@@ -24,6 +24,13 @@
             <h6 class="m-0 font-weight-bold text-primary">Portfolios</h6>
         </div>
         <div class="card-body">
+
+            @if(session()->has('PortfolioDelete'))
+            <div class="alert alert-success mt4" role="alert">
+           {{ session()->get('PortfolioDelete') }}
+            </div>
+            @endif
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -34,6 +41,7 @@
                             <th>Date</th>
                             <th>User</th>
                             <th>Category</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -44,6 +52,7 @@
                             <th>Date</th>
                             <th>User</th>
                             <th>Category</th>
+                            <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -60,6 +69,9 @@
                                 @endif
                             </td>
                             <td>{{$portfolio->category->desc}}</td>
+                            <td>
+                                <a href="portfolio-delete/{{$portfolio->id}}" class="btn btn-danger">Delete</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

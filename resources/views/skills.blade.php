@@ -28,6 +28,13 @@
                                     </div>
                                     @endif
 
+
+                                    @if(session()->has('TagDeleted'))
+                                    <div class="alert alert-success mt4" role="alert">
+                                   {{ session()->get('TagDeleted') }}
+                                    </div>
+                                    @endif
+
                                     <form method="post" action="/skills-store" class="form-inline">
                                         {{ csrf_field() }}
 
@@ -50,17 +57,22 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         @foreach ($skills as $skill)
                                         <tr>
                                             <td>{{$skill->name}}</td>
+                                            <td>
+                                                <a href="skills-delete/{{$skill->name}}" class="btn btn-danger">Delete</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

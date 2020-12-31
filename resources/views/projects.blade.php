@@ -23,6 +23,13 @@
                             <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                         </div>
                         <div class="card-body">
+
+                            @if(session()->has('ProjectDelete'))
+                            <div class="alert alert-success mt4" role="alert">
+                           {{ session()->get('ProjectDelete') }}
+                            </div>
+                            @endif
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -34,6 +41,7 @@
                                             <th>Status</th>
                                             <th>Category</th>
                                             <th>User</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -45,6 +53,7 @@
                                             <th>Status</th>
                                             <th>Category</th>
                                             <th>User</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -61,6 +70,9 @@
                                                 {{$project->user->first_name}}
                                                 {{$project->user->last_name}}
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="project-delete/{{$project->id}}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach
