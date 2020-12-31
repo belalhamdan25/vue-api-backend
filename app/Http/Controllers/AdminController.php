@@ -7,6 +7,8 @@ use App\User;
 use App\Project;
 use App\ProjectOffer;
 use App\Portfolio;
+use App\Tag;
+use App\Category;
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
@@ -93,4 +95,33 @@ class AdminController extends Controller
 
         return view('portfolios',compact('portfolios'));
     }
+
+    public function skillsCreate(){
+        $skills=Tag::orderBy('id', 'desc')->paginate(10);
+
+        return view('skills',compact('skills'));
+    }
+
+    public function skillsStore(){
+        $skill=New Tag;
+        $skill->name=request('skill');
+        $skill->save();
+        return redirect()->back()->with('successfulSkillAdd : ', $skill->name);
+
+    }
+
+    public function categoryCreate(){
+        $categories=Category::orderBy('id', 'desc')->paginate(10);
+
+        return view('category',compact('categories'));
+    }
+    public function categoryStore(){
+        $category=New Category;
+        $category->name=request('category');
+        $category->desc=request('category');
+        $category->save();
+        return redirect()->back()->with('successfulcategoriesAdd : ', $category->desc);
+
+    }
+
 }

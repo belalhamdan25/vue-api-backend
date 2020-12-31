@@ -36,6 +36,10 @@ Route::group(['middleware' => 'authenticated'], function () {
         Route::get('/projects', 'AdminController@projectsCreate');
         Route::get('/offers', 'AdminController@offersCreate');
         Route::get('/portfolios', 'AdminController@portfoliosCreate');
+        Route::get('/skills', 'AdminController@skillsCreate');
+        Route::post('/skills-store', 'AdminController@skillsStore');
+        Route::get('/category', 'AdminController@categoryCreate');
+        Route::post('/category-store', 'AdminController@categoryStore');
 
 
 });

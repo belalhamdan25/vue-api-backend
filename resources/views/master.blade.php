@@ -143,6 +143,23 @@
             </li>
 
 
+                        <hr class="sidebar-divider d-none d-md-block">
+                        <!-- Heading -->
+                        <div class="sidebar-heading">
+                            Other
+                        </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/skills">
+                    <i class="fas fa-tags"></i>
+                    <span>Skills</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/category">
+                    <i class="fas fa-user-tag"></i>
+                    <span>Category</span></a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
