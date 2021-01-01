@@ -1,8 +1,7 @@
-
 @extends('master')
 
 @section('title')
-<title>Worker Admin | Offers</title>
+<title>Worker Admin | Projects</title>
 @stop
 
 @section('css')
@@ -13,7 +12,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">All Offers</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Search Projects Results</h1>
                     {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
@@ -21,26 +20,21 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Offers</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                         </div>
                         <div class="card-body">
 
-                            @if(session()->has('ProjectOfferDelete'))
-                            <div class="alert alert-success mt4" role="alert">
-                           {{ session()->get('ProjectOfferDelete') }}
-                            </div>
-                            @endif
 
-                            <form method="post" action="offer-search" class="input-group mb-4">
+                            <form method="post" action="project-search" class="input-group mb-4">
                                 {{ csrf_field() }}
 
                                 <input
                                   type="text"
                                   class="form-control"
-                                  name="offerSearch"
-                                  placeholder="Offers Search"
-                                  aria-label="Offers Search"
-                                  aria-describedby="Offers Search"
+                                  name="projectSearch"
+                                  placeholder="Projects Search"
+                                  aria-label="Projects Search"
+                                  aria-describedby="Projects Search"
                                 />
                                 <div class="input-group-append">
                                   <button
@@ -52,47 +46,51 @@
                                 </div>
                               </form>
 
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Timeline</th>
-                                            <th>Coast</th>
-                                            <th>Profit</th>
+                                            <th>Title</th>
                                             <th>Desc</th>
+                                            <th>Budget</th>
+                                            <th>Time Line</th>
                                             <th>Status</th>
+                                            <th>Category</th>
                                             <th>User</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Timeline</th>
-                                            <th>Coast</th>
-                                            <th>Profit</th>
+                                            <th>Title</th>
                                             <th>Desc</th>
+                                            <th>Budget</th>
+                                            <th>Time Line</th>
                                             <th>Status</th>
+                                            <th>Category</th>
                                             <th>User</th>
                                             <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($offers as $offer)
+                                        @foreach ($projectSearch as $project)
                                         <tr>
-                                            <td>{{$offer->timeline}}</td>
-                                            <td>{{$offer->coast}}</td>
-                                            <td>{{$offer->profit}}</td>
-                                            <td>{{$offer->desc}}</td>
-                                            <td>{{$offer->status}}</td>
+                                            <td>{{$project->title}}</td>
+                                            <td>{{$project->desc}}</td>
+                                            <td>{{$project->budget}}</td>
+                                            <td>{{$project->time_line}}</td>
+                                            <td>{{$project->status}}</td>
+                                            <td>{{$project->category->desc}}</td>
                                             <td>
-                                                @if(!empty($offer->user))
-                                                {{$offer->user->first_name}}
-                                                {{$offer->user->last_name}}
+                                                @if(!empty($project->user))
+                                                {{$project->user->first_name}}
+                                                {{$project->user->last_name}}
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="offer-delete/{{$offer->id}}" class="btn btn-danger">Delete</a>
-                                                <a href="offer-edit/{{ $offer->id }}" class="btn btn-warning">Edit</a>
+                                                <a href="project-delete/{{$project->id}}" class="btn btn-danger">Delete</a>
+                                                <a href="project-edit/{{ $project->id }}" class="btn btn-warning">Edit</a>
 
                                             </td>
                                         </tr>
@@ -100,7 +98,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $offers->links()}}
+                            {{ $projectSearch->links()}}
 
                         </div>
                     </div>
@@ -108,7 +106,6 @@
                 <!-- /.container-fluid -->
 
 @stop
-
-
 @section('script')
+
 @stop

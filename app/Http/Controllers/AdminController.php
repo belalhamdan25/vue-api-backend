@@ -119,8 +119,37 @@ class AdminController extends Controller
 
     public function projectsDelete(Project $id){
         $id->delete();
-        return redirect()->back()->with('ProjectDelete', $id->title. ' Deleted ' );
+        return redirect('/projects')->with('ProjectDelete', $id->title. ' Deleted ' );
     }
+
+
+    public function projectsEditCreate(Project $id){
+
+        $categories=Category::all();
+
+        return view('projects_edit',compact('id','categories'));
+    }
+
+    public function projectsEditUpdate(Project $id){
+
+        $id->title = request('title');
+        $id->budget = request('budget');
+        $id->time_line = request('time_line');
+        $id->category_id = request('category_id');
+        $id->desc = request('desc');
+
+        $id->save();
+
+        return redirect()->back()->with('successfulEdit', $id->title . ' ' . 'Edit Successful');
+    }
+
+    public function projectSearch(Request $request)
+    {
+        $projectSearch = Project::where('title', 'like', '%' . $request->get('projectSearch') . '%')->paginate(10);
+        return view('project-search',compact('projectSearch'));
+
+    }
+
 
     public function offersCreate(){
         $offers=ProjectOffer::orderBy('id', 'desc')->paginate(10);
@@ -130,7 +159,33 @@ class AdminController extends Controller
 
     public function offersDelete(ProjectOffer $id){
         $id->delete();
-        return redirect()->back()->with('ProjectOfferDelete', ' Deleted ' );
+        return redirect('/offers')->with('ProjectOfferDelete', ' Deleted ' );
+    }
+
+    public function offersEditCreate(ProjectOffer $id){
+
+
+
+        return view('offers_edit',compact('id'));
+    }
+
+    public function offersEditUpdate(ProjectOffer $id){
+
+        $id->timeline = request('timeline');
+        $id->profit = request('profit');
+        $id->coast = request('coast');
+        $id->desc = request('desc');
+
+        $id->save();
+
+        return redirect()->back()->with('successfulEdit', $id->title . ' ' . 'Edit Successful');
+    }
+
+    public function offerSearch(Request $request)
+    {
+        $offerSearch = Project::where('desc', 'like', '%' . $request->get('offerSearch') . '%')->paginate(10);
+        return view('offer-search',compact('offerSearch'));
+
     }
 
     public function portfoliosCreate(){

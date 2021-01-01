@@ -13,7 +13,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">All Offers</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Search Offers Results</h1>
                     {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
@@ -24,12 +24,6 @@
                             <h6 class="m-0 font-weight-bold text-primary">Offers</h6>
                         </div>
                         <div class="card-body">
-
-                            @if(session()->has('ProjectOfferDelete'))
-                            <div class="alert alert-success mt4" role="alert">
-                           {{ session()->get('ProjectOfferDelete') }}
-                            </div>
-                            @endif
 
                             <form method="post" action="offer-search" class="input-group mb-4">
                                 {{ csrf_field() }}
@@ -51,7 +45,6 @@
                                   </button>
                                 </div>
                               </form>
-
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -77,7 +70,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @foreach ($offers as $offer)
+                                        @foreach ($offerSearch as $offer)
                                         <tr>
                                             <td>{{$offer->timeline}}</td>
                                             <td>{{$offer->coast}}</td>
@@ -100,7 +93,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $offers->links()}}
+                            {{ $offerSearch->links()}}
 
                         </div>
                     </div>

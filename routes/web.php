@@ -30,6 +30,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 
         Route::get('/', 'AdminController@index');
         Route::get('/logout', 'AdminController@logout');
+
         Route::get('/users', 'AdminController@usersCreate');
         Route::get('/users-delete/{id}', 'AdminController@usersDelete');
         Route::get('/users-reset/{id}', 'AdminController@usersResetPass');
@@ -38,8 +39,17 @@ Route::group(['middleware' => 'authenticated'], function () {
 
         Route::get('/projects', 'AdminController@projectsCreate');
         Route::get('/project-delete/{id}', 'AdminController@projectsDelete');
+        Route::get('/project-edit/{id}', 'AdminController@projectsEditCreate');
+        Route::post('/project-edit/{id}', 'AdminController@projectsEditUpdate');
+        Route::post('/project-search', 'AdminController@projectSearch');
+
         Route::get('/offers', 'AdminController@offersCreate');
         Route::get('/offer-delete/{id}', 'AdminController@offersDelete');
+        Route::get('/offer-edit/{id}', 'AdminController@offersEditCreate');
+        Route::post('/offer-edit/{id}', 'AdminController@offersEditUpdate');
+        Route::post('/offer-search', 'AdminController@offerSearch');
+
+
         Route::get('/portfolios', 'AdminController@portfoliosCreate');
         Route::get('/portfolio-delete/{id}', 'AdminController@portfoliosDelete');
         Route::get('/skills', 'AdminController@skillsCreate');
