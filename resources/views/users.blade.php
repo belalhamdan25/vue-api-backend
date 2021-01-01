@@ -36,6 +36,12 @@
                             </div>
                             @endif
 
+                            @if(session()->has('userDeleted'))
+                            <div class="alert alert-success mt4" role="alert">
+                           {{ session()->get('userDeleted') }}
+                            </div>
+                            @endif
+
                             <form method="post" action="users-search" class="input-group mb-4">
                                 {{ csrf_field() }}
 

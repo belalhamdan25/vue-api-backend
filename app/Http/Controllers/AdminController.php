@@ -64,10 +64,12 @@ class AdminController extends Controller
     }
     public function usersDelete(User $id){
         if ($id->role_name == "admin") {
-            return redirect()->back()->with('adminDelete', 'You cannot delete admin');
+            return redirect('/users')->with('adminDelete', 'You cannot delete admin');
         } else {
             $id->delete();
-            return redirect()->back()->with('userDeleted', $id->email);
+
+            return redirect('/users')->with('userDeleted', $id->email . ' ' . 'Deleted');
+
         }
     }
 
@@ -76,8 +78,9 @@ class AdminController extends Controller
         $id->password = Hash::make("1234567890");
         $id->save();
 
-        return redirect()->back()->with('successfulReset', $id->email . ' ' . 'Reset Successful .. password reset is 1234567890');
+        return redirect('/users')->with('successfulReset', $id->email . ' ' . 'Reset Successful .. password reset is 1234567890');
     }
+
 
     public function usersSearch(Request $request)
     {
