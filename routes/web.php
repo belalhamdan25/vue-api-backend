@@ -69,7 +69,9 @@ Route::group(['middleware' => 'authenticated'], function () {
         Route::get('/category', 'AdminController@categoryCreate');
         Route::post('/category-store', 'AdminController@categoryStore');
         Route::get('/category-delete/{id}', 'AdminController@categoryDelete');
-
+        Route::get('/category-edit/{id}', 'AdminController@categoryEditCreate');
+        Route::post('/category-edit/{id}', 'AdminController@categoryEditUpdate');
+        Route::post('/category-search', 'AdminController@categorySearch');
 
 });
 

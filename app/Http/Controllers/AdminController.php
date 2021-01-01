@@ -284,7 +284,31 @@ class AdminController extends Controller
 
     public function categoryDelete(Category $id){
         $id->delete();
-            return redirect()->back()->with('CategoryDelete', $id->desc. ' Deleted ' );
+            return redirect('category')->with('CategoryDelete', $id->desc. ' Deleted ' );
+    }
+
+    public function categoryEditCreate(Category $id){
+
+
+
+        return view('category_edit',compact('id'));
+    }
+    public function categoryEditUpdate(Category $id){
+
+        $id->name = request('category');
+        $id->desc = request('category');
+
+
+        $id->save();
+
+        return redirect()->back()->with('successfulEdit', $id->desc . ' ' . 'Edit Successful');
+    }
+
+    public function categorySearch(Request $request)
+    {
+        $categorySearch = Category::where('desc', 'like', '%' . $request->get('categorySearch') . '%')->paginate(10);
+        return view('category-search',compact('categorySearch'));
+
     }
 
 }
