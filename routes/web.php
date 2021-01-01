@@ -34,6 +34,7 @@ Route::group(['middleware' => 'authenticated'], function () {
         Route::get('/users-delete/{id}', 'AdminController@usersDelete');
         Route::get('/users-reset/{id}', 'AdminController@usersResetPass');
         Route::post('/users-search', 'AdminController@usersSearch');
+        Route::post('/add-users', 'AdminController@usersAdd');
 
         Route::get('/projects', 'AdminController@projectsCreate');
         Route::get('/project-delete/{id}', 'AdminController@projectsDelete');

@@ -9,6 +9,7 @@ use App\ProjectOffer;
 use App\Portfolio;
 use App\Tag;
 use App\Category;
+use App\Role;
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
@@ -59,8 +60,10 @@ class AdminController extends Controller
 
     public function usersCreate(){
         $users=User::orderBy('id', 'desc')->paginate(20);
+        $roles=Role::all();
+        $categories=Category::all();
 
-        return view('users',compact('users'));
+        return view('users',compact('users','roles','categories'));
     }
     public function usersDelete(User $id){
         if ($id->role_name == "admin") {
@@ -88,6 +91,25 @@ class AdminController extends Controller
         return view('users-search',compact('usersSearch'));
 
     }
+
+    public function usersAdd(Request $request)
+    {
+        $user = new User;
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->email = request('email');
+        $user->phone_number = request('phone_number');
+        $user->password = Hash::make(request('password'));
+        $user->role_name = request('role_name');
+        $user->location = request('country');
+        $user->category_id = request('category_id');
+
+        $user->save();
+
+        return redirect('/users')->with('successfulAddUser', $user->email . ' ' . 'Add Successful');
+
+    }
+
 
     public function projectsCreate(){
         $projects=Project::orderBy('id', 'desc')->paginate(10);
