@@ -52,9 +52,20 @@ Route::group(['middleware' => 'authenticated'], function () {
 
         Route::get('/portfolios', 'AdminController@portfoliosCreate');
         Route::get('/portfolio-delete/{id}', 'AdminController@portfoliosDelete');
+        Route::get('/portfolio-edit/{id}', 'AdminController@portfolioEditCreate');
+        Route::post('/portfolio-edit/{id}', 'AdminController@portfolioEditUpdate');
+        Route::post('/portfolio-search', 'AdminController@portfolioSearch');
+
+
+
         Route::get('/skills', 'AdminController@skillsCreate');
         Route::post('/skills-store', 'AdminController@skillsStore');
         Route::get('/skills-delete/{id}', 'AdminController@skillsDelete');
+        Route::get('/skills-edit/{id}', 'AdminController@skillsEditCreate');
+        Route::post('/skills-edit/{id}', 'AdminController@skillsEditUpdate');
+        Route::post('/skills-search', 'AdminController@skillsSearch');
+
+
         Route::get('/category', 'AdminController@categoryCreate');
         Route::post('/category-store', 'AdminController@categoryStore');
         Route::get('/category-delete/{id}', 'AdminController@categoryDelete');

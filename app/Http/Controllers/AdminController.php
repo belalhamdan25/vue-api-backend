@@ -196,7 +196,35 @@ class AdminController extends Controller
 
     public function portfoliosDelete(Portfolio $id){
         $id->delete();
-        return redirect()->back()->with('PortfolioDelete', ' Deleted ' );
+        return redirect('portfolios')->with('PortfolioDelete', ' Deleted ' );
+    }
+
+    public function portfolioEditCreate(Portfolio $id){
+
+        $categories=Category::all();
+
+
+        return view('portfolio_edit',compact('id','categories'));
+    }
+
+    public function portfolioEditUpdate(Portfolio $id){
+
+        $id->title = request('title');
+        $id->link = request('link');
+        $id->date = request('date');
+        $id->category_id = request('category_id');
+        $id->desc = request('desc');
+
+        $id->save();
+
+        return redirect()->back()->with('successfulEdit', $id->title . ' ' . 'Edit Successful');
+    }
+
+    public function portfolioSearch(Request $request)
+    {
+        $portfolioSearch = Portfolio::where('title', 'like', '%' . $request->get('portfolioSearch') . '%')->paginate(10);
+        return view('portfolio-search',compact('portfolioSearch'));
+
     }
 
     public function skillsCreate(){
@@ -214,7 +242,30 @@ class AdminController extends Controller
     }
     public function skillsDelete(Tag $id){
         $id->delete();
-            return redirect()->back()->with('TagDeleted', $id->name. ' Deleted ' );
+            return redirect('skills')->with('TagDeleted', $id->name. ' Deleted ' );
+    }
+
+    public function skillsEditCreate(Tag $id){
+
+
+
+        return view('skills_edit',compact('id'));
+    }
+    public function skillsEditUpdate(Tag $id){
+
+        $id->name = request('skills');
+
+
+        $id->save();
+
+        return redirect('skills')->with('successfulEdit', $id->name . ' ' . 'Edit Successful');
+    }
+
+    public function skillsSearch(Request $request)
+    {
+        $skillsSearch = Tag::where('name', 'like', '%' . $request->get('skillsSearch') . '%')->paginate(10);
+        return view('skills-search',compact('skillsSearch'));
+
     }
 
     public function categoryCreate(){
