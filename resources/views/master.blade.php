@@ -42,7 +42,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item  {{Request::path() === '/' ? 'active' : ''}}">
                 <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -117,26 +117,26 @@
             </li> --}}
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <li class="nav-item {{Request::path() === 'users' ? 'active' : ''}}">
                 <a class="nav-link" href="/users">
                     <i class="fas fa-users"></i>
                     <span>Users</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item {{Request::path() === 'projects' ? 'active' : ''}}">
                 <a class="nav-link" href="/projects">
                     <i class="fas fa-file"></i>
                     <span>Projects</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item  {{Request::path() === 'offers' ? 'active' : ''}}">
                 <a class="nav-link" href="/offers">
                     <i class="fas fa-dollar-sign"></i>
                     <span>Offers</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{Request::path() === 'portfolios' ? 'active' : ''}}">
                 <a class="nav-link" href="/portfolios">
                     <i class="fas fa-image"></i>
                     <span>Portfolios</span></a>
@@ -148,12 +148,12 @@
                         <div class="sidebar-heading">
                             Other
                         </div>
-            <li class="nav-item">
+            <li class="nav-item  {{Request::path() === 'skills' ? 'active' : ''}}">
                 <a class="nav-link" href="/skills">
                     <i class="fas fa-tags"></i>
                     <span>Skills</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item {{Request::path() === 'category' ? 'active' : ''}}">
                 <a class="nav-link" href="/category">
                     <i class="fas fa-user-tag"></i>
                     <span>Category</span></a>
