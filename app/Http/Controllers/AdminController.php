@@ -112,7 +112,7 @@ class AdminController extends Controller
 
 
     public function projectsCreate(){
-        $projects=Project::orderBy('id', 'desc')->paginate(10);
+        $projects=Project::with('category','user')->orderBy('id', 'desc')->paginate(10);
 
         return view('projects',compact('projects'));
     }

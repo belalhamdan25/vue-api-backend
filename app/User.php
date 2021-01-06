@@ -17,6 +17,15 @@ class User extends Authenticatable implements JWTSubject
     	'balance' => 0
     ];
 
+    public static function boot(){
+        parent::boot();
+        static::deleting(function($user){
+            if($user->projects()->exists()){
+                $user->projects()->delete();
+            }
+        });
+    }
+
     public function role(){
         return $this->belongsTo(Role::class);
     }
