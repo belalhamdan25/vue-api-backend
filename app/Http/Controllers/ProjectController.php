@@ -276,7 +276,7 @@ class ProjectController extends Controller
             $transaction->save();
 
             Auth::user()->sent()->create([
-                'body'       => $request->body,
+                'body'       => "start",
                 'sent_to_id' => $userVendor->id,
             ]);
 
