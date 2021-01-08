@@ -16,6 +16,7 @@ use App\ProjectOffer;
 use App\User;
 use App\Transaction;
 use App\Purchase;
+use Auth;
 class ProjectController extends Controller
 {
     public function all(){
@@ -273,6 +274,11 @@ class ProjectController extends Controller
             $transaction->amount = $profit;
             $transaction->user_id = $userVendor->id;
             $transaction->save();
+
+            Auth::user()->sent()->create([
+                'body'       => $request->body,
+                'sent_to_id' => $userVendor->id,
+            ]);
 
             // $purchase = new Purchase;
             // $purchase->project_id=$request->get('project');
