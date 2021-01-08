@@ -59,7 +59,7 @@ class AdminController extends Controller
     }
 
     public function usersCreate(){
-        $users=User::orderBy('id', 'desc')->paginate(20);
+        $users=User::orderBy('id', 'desc')->with('category')->paginate(20);
         $roles=Role::all();
         $categories=Category::all();
 
@@ -152,7 +152,7 @@ class AdminController extends Controller
 
 
     public function offersCreate(){
-        $offers=ProjectOffer::orderBy('id', 'desc')->paginate(10);
+        $offers=ProjectOffer::orderBy('id', 'desc')->with('user')->paginate(10);
 
         return view('offers',compact('offers'));
     }
@@ -189,7 +189,7 @@ class AdminController extends Controller
     }
 
     public function portfoliosCreate(){
-        $portfolios=Portfolio::orderBy('id', 'desc')->paginate(10);
+        $portfolios=Portfolio::orderBy('id', 'desc')->with('user','category')->paginate(10);
 
         return view('portfolios',compact('portfolios'));
     }
