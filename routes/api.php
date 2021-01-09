@@ -70,6 +70,7 @@ Route::group([
 ], function ($router) {
 
     Route::get('projects', 'ProjectController@all');
+    Route::get('projects-two', 'ProjectController@allTwo');
     Route::get('search', 'ProjectController@search');
     Route::post('categories-filter', 'ProjectController@categoriesFilter');
     Route::post('skills-filter', 'ProjectController@skillsFilter');
