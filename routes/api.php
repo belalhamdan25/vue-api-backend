@@ -130,4 +130,17 @@ Route::group([
 
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'message'
+
+], function ($router) {
+
+    Route::get('received', 'MessageController@received');
+    Route::get('sent', 'MessageController@sent');
+
+
+});
+
 
