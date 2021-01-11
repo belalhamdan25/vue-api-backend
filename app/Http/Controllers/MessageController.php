@@ -28,8 +28,9 @@ class MessageController extends Controller
         $sender_id=auth()->user()->id;
         $sent_to_id=$request->get('sent_to_id');
 
-        return Message::where('sender_id',$sender_id)->where('sent_to_id',$sent_to_id)->orderBy('id', 'desc')->get();
+        return Message::where('sender_id',$sender_id)->where('sent_to_id',$sent_to_id)->orWhere('sent_to_id',$sender_id)->Where('sender_id',$sent_to_id)->orderBy('id', 'desc')->get();
     }
+
 
     public function store(Request $request){
         $newMessage=New Message;
