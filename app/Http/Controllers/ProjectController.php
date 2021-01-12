@@ -16,6 +16,7 @@ use App\ProjectOffer;
 use App\User;
 use App\Transaction;
 use App\Purchase;
+use App\Message;
 class ProjectController extends Controller
 {
     public function all(){
@@ -273,11 +274,15 @@ class ProjectController extends Controller
             $transaction->user_id = $userVendor->id;
             $transaction->save();
 
-            Auth::user()->sent()->create([
-                'body'       => "start",
-                'sent_to_id' => $userVendor->id,
-            ]);
-
+            // Auth::user()->sent()->create([
+            //     'body'       => "start",
+            //     'sent_to_id' => $userVendor->id,
+            // ]);
+            $newMessage=New Message;
+            $newMessage->sender_id = $request->get('sender_id');
+            $newMessage->sent_to_id = $request->get('sent_to_id');
+            $newMessage->body = $request->get('body');
+            $newMessage->save();
             // $purchase = new Purchase;
             // $purchase->project_id=$request->get('project');
             // $purchase->user_id=$request->get('userBuyer');
