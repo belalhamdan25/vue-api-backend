@@ -15,14 +15,17 @@ class MessageController extends Controller
     public function received(Request $request){
         $userId=$request->get('user_id');
         $user=User::find($userId);
-        return $user->received; // All messages received by this user
+        $users_id= $user->received->pluck('sender_id')->unique()->toArray(); // All messages received by this user
+
+        return User::find($users_id);
+
     }
 
-    public function sent(Request $request){
-        $userId=$request->get('user_id');
-        $user=User::find($userId);
-        return $user->sent;       // All messages sent by this user
-    }
+    // public function sent(Request $request){
+    //     $userId=$request->get('user_id');
+    //     $user=User::find($userId);
+    //     return $user->sent;       // All messages sent by this user
+    // }
 
     public function conversation(Request $request){
         $sender_id=auth()->user()->id;
