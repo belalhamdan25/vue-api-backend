@@ -15,11 +15,9 @@ class MessageController extends Controller
     public function received(Request $request){
         $userId=$request->get('user_id');
         $user=User::find($userId);
-        $users_idsender_id= $user->received->pluck('sender_id')->unique()->toArray(); // All messages received by this user
-        $users_idsent_to_id= $user->received->pluck('sent_to_id')->unique()->toArray(); // All messages received by this user
+        $users_id= $user->received->pluck('sender_id')->unique()->toArray(); // All messages received by this user
 
-        $result = array_merge($users_idsender_id, $users_idsent_to_id);
-        return User::find($result);
+        return User::find($users_id);
 
     }
 
