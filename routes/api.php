@@ -139,7 +139,7 @@ Route::group([
 
     Route::get('received', 'MessageController@received');
     // Route::get('sent', 'MessageController@sent');
-    Route::get('conversation', 'MessageController@conversation');
+    Route::post('conversation', 'MessageController@conversation');
     Route::get('all', 'MessageController@allMessages');
     Route::post('store', 'MessageController@store');
 
