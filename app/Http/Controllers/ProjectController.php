@@ -196,40 +196,19 @@ class ProjectController extends Controller
         ], 200);
     }
     public function closeProject(Project $id){
-        if( $id->status="open"){
-            $id->status="closed";
-            $id->save();
-            return response()->json([
-                'status' => 'closed',
-            ], 200);
-        }else if($id->status="in proccess"){
-            return response()->json([
-                'status' => 'no',
-            ], 200);
-        }else if($id->status="finished"){
-            return response()->json([
-                'status' => 'no',
-            ], 200);
-        }else if($id->status="closed"){
-            return response()->json([
-                'status' => 'no',
-            ], 200);
-        }
-
+        $id->status="closed";
+        $id->save();
+        return response()->json([
+            'status' => 'closed',
+        ], 200);
     }
 
     public function finishProject(Project $id){
-        if( $id->status="in proccess"){
-            $id->status="finished";
-            $id->save();
-            return response()->json([
-                'status' => 'finished',
-            ], 200);
-        }{
-            return response()->json([
-                'status' => 'no',
-            ], 200);
-        }
+        $id->status="finished";
+        $id->save();
+        return response()->json([
+            'status' => 'finished',
+        ], 200);
     }
 
     public function editProject(Project $id,Request $request){
