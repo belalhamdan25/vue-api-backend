@@ -202,7 +202,15 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => 'closed',
             ], 200);
-        }else{
+        }else if($id->status="in proccess"){
+            return response()->json([
+                'status' => 'no',
+            ], 200);
+        }else if($id->status="finished"){
+            return response()->json([
+                'status' => 'no',
+            ], 200);
+        }else if($id->status="closed"){
             return response()->json([
                 'status' => 'no',
             ], 200);
