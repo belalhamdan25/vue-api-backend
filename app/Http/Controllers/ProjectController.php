@@ -289,7 +289,7 @@ class ProjectController extends Controller
             $newMessage->body = $request->get('body');
             $newMessage->save();
 
-            $offerStatusId=ProjectOffer::where('user_id',$userVendor)->pluck('id')->first();
+            $offerStatusId=ProjectOffer::where('user_id',$userVendor->id)->pluck('id')->first();
             $offerStatus=ProjectOffer::find($offerStatusId);
             $offerStatus->status="in proccess";
             $offerStatus->save();
