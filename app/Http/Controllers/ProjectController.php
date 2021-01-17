@@ -282,22 +282,17 @@ class ProjectController extends Controller
             $transaction->user_id = $userVendor->id;
             $transaction->save();
 
-            // Auth::user()->sent()->create([
-            //     'body'       => "start",
-            //     'sent_to_id' => $userVendor->id,
-            // ]);
+
             $newMessage=New Message;
             $newMessage->sender_id = $request->get('sender_id');
             $newMessage->sent_to_id = $request->get('sent_to_id');
             $newMessage->body = $request->get('body');
             $newMessage->save();
-            // $purchase = new Purchase;
-            // $purchase->project_id=$request->get('project');
-            // $purchase->user_id=$request->get('userBuyer');
-            // $purchase->worker_id=$request->get('userVendor');
-            // $purchase->status='in proccess';
-            // $purchase->save();
 
+            $offerStatusId=ProjectOffer::where('user_id',$userVendor)->pluck('id')->first();
+            $offerStatus=ProjectOffer::find($offerStatusId);
+            $offerStatus->status="in proccess";
+            $offerStatus->save();
 
             return response()->json([
                 'status' => 'success',
