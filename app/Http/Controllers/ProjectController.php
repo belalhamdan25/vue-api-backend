@@ -300,9 +300,7 @@ class ProjectController extends Controller
 
 
         }else{
-            return response()->json([
-                'status' => 'balance issue',
-            ]);
+            return response()->json(['error' => 'balance issue'], 500);
         }
 
     }
