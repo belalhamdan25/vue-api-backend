@@ -50,6 +50,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Transaction::class);
     }
 
+    public function rates(){
+        return $this->hasMany(Rate::class);
+    }
+
     // A user can send a message
     public function sent()
     {

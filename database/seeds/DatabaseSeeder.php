@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Project::class, 150)->create();
         factory(App\Transaction::class, 1000)->create();
         // factory(App\Message::class, 100)->create();
+        factory(App\Rate::class, 1000)->create();
 
         $this->call([
             SkillsSeeder::class,
